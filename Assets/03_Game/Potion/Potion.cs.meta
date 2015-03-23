@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: c7b8a1d2881cd7542882fe84759bfbd0
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - donjon: {fileID: 100000, guid: 6328b99ff4dfb1f49b376314710d45de, type: 2}
+  - donjon_script: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

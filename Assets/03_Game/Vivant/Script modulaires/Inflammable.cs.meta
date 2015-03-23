@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 200d175b1bbedef4aaa8b1127cfc87a3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - main_script: {instanceID: 0}
+  - cendre_prefab: {fileID: 165528, guid: 25cfd8c42411c2b4ea26d51c13947eea, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
