@@ -5,14 +5,30 @@ using System.Collections.Generic;
 public class Donjon : MonoBehaviour {
 
     //LA ROOM
-        //Tableau des portes à instancier
-        public GameObject[] room_prefab;
+        //Matrice générale
+        public List<List<GameObject>> matrice = new List<List<GameObject>>();
+        
+        //Tableau des rooms à instancier
+        public List<GameObject> set1 = new List<GameObject>();
+        public List<GameObject> set2 = new List<GameObject>();
+        
+        //Liste des set déjà fait
+        public List<int> set_memory = new List<int>();
+        
+        //La room que l'on va utiliser
+        public List<GameObject> room_prefab=new List<GameObject>();
 
         //La room pour l'instanciation
         private GameObject room;
 
         //Le script de la room
         public Room room_script;
+
+        //La variable pour l'aléatoire
+        public int numero_aleatoire;
+        
+        //Le bool de vérification du choix.
+        public bool IsAlreadyDone;
 
     //DONNEE DE CALCUL
         //L'id de la room dans laquel le joueur est actuellement
@@ -50,9 +66,50 @@ public class Donjon : MonoBehaviour {
         id_last_room = 0;
         from = "null";
 
+
+        //Ajout des set dans la matrice
+        matrice.Add(set1); matrice.Add(set2);
+
+        //Choix aléatoire de la room
+
+            //Mise à null de room_prefab
+            room_prefab = new List<GameObject>();
+
+            //Si on a fait tout les numéros, on reset la liste
+            if(set_memory.Count==matrice.Count)
+            {
+                set_memory= new List<int>();
+            }
+
+        if(matrice.Count>0) //Si la matrice contient quelquechose
+        {
+            IsAlreadyDone = false;
+            while(room_prefab.Count<1) //Tant que l'on a pas trouvé quelquechose a mettre dans le tableau que l'on va utiliser
+            {
+                numero_aleatoire=Random.Range(0,matrice.Count); //On cherche un set aléatoire
+                for(int i=0; i<set_memory.Count-1;i++)              //On vérifie que le set n'a pas déjà été fait
+                {
+                    if(numero_aleatoire==set_memory[i])         //Si c'est le cas on le signal
+                    {
+                        IsAlreadyDone = true;
+                        break;                                  //Et on sors immédiatement de la boucle;
+                    }
+                }
+
+                if(IsAlreadyDone==false)                        //Si on a parcouru la boucle et que le numéro n'a pas encore était pris
+                {
+                    break;                                      //On ne retoure pas au début
+                }
+            }
+
+            room_prefab = matrice[numero_aleatoire];            //On choisi le set qui n'a pas encore était pris
+            set_memory.Add(numero_aleatoire);                   //On s'assure que le numéro ne peut être repris
+
+        }
+
         //Lancement de la première room
         creation_nouvelle_room();
-
+        
 	}
 	
     void creation_nouvelle_room(int _x=0, int _y=0, string _from="null")

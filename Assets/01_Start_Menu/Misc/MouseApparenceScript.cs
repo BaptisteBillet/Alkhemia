@@ -5,10 +5,12 @@ public class MouseApparenceScript : MonoBehaviour {
 
     public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
+    private Vector2 hotSpot = new Vector2(16, 16);//Vector2.zero;
 
     public void Start()
     { Cursor.SetCursor(cursorTexture, hotSpot, cursorMode); }
+
+
 
 
 }

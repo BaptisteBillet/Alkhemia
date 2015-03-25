@@ -80,7 +80,7 @@ public class Player : MonoBehaviour {
 
 
     //Inventaire
-    public GameObject[] inventaire = new GameObject[20];
+    public GameObject[] inventaire = new GameObject[1];
     public int place_inventaire;
 
     //temps invincible après touché
@@ -388,11 +388,13 @@ public class Player : MonoBehaviour {
                             cadran_script.timer = vivant_script.temps_recolte;
 
                             busy = true;
+                            if (place_inventaire > 0)
+                            {
+                                StartCoroutine(recolte(vivant_script.temps_recolte, other.gameObject, other.gameObject.tag));
 
-                            StartCoroutine(recolte(vivant_script.temps_recolte, other.gameObject, other.gameObject.tag));
-
-                            //on lance l'anim de récolte
-                            anim.SetTrigger("recolting");
+                                //on lance l'anim de récolte
+                                anim.SetTrigger("recolting");
+                            }
                         }
                     }
 
@@ -416,14 +418,16 @@ public class Player : MonoBehaviour {
                             //Pour le cadran, on lui défini son temps
                             cadran_script = (Chargement_cadran)cadran_prefab.GetComponent(typeof(Chargement_cadran));
                             cadran_script.timer = vivant_script.temps_depecage;
-                            ;
+                            
 
                             busy = true;
+                            if (place_inventaire > 0)
+                            {
+                                StartCoroutine(recolte(vivant_script.temps_recolte, other.gameObject, other.gameObject.tag));
 
-                            StartCoroutine(recolte(vivant_script.temps_recolte, other.gameObject, other.gameObject.tag));
-
-                            //on lance l'anim de récolte
-                            anim.SetTrigger("recolting");
+                                //on lance l'anim de récolte
+                                anim.SetTrigger("recolting");
+                            }
                         }
                     }
 
@@ -436,7 +440,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator recolte(float temps, GameObject other, string objet)
     {
-        if (objet == "vivant") // && place_inventaire>0)
+        if (objet == "vivant" && place_inventaire>0)
         {
             vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
             cadran = Instantiate(cadran_prefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z), Quaternion.identity) as GameObject;
@@ -473,46 +477,44 @@ public class Player : MonoBehaviour {
                 //le joueur vient de finir de récolter, il n'est plus busy
                 if (temps <= 0)
                 {
+ 
+                    //TIMER
                     cadran_script = (Chargement_cadran)cadran.GetComponent(typeof(Chargement_cadran));
                     cadran_script.timer = -1;
                     busy = false;
+                    //VIVANT
                     vivant_script.producteur_ok = false;
 
-                    if (vivant_script.destroy_si_recolte == true)
-                    {
-                        Destroy(vivant_script.gameObject);
-                    }
-
+                   
 
                     //on fini l'animation de récolte 
                     anim.SetTrigger("recolting_end");
 
-
-
                     bool change = false;
 
-                    for (int i = 0; i < vivant_script.ingredient_recolte.Length; i++)   //Pour chaque case de l'inventaire...
+                    for (int i = 0; i < inventaire.Length; i++)   //Pour chaque case de l'inventaire...
                     {
-                        if (place_inventaire <= 0)
+     
+                        if (place_inventaire <= 0) //Si l'inventaire est plein
                         {
-                            break;
+                            Instantiate(vivant_script.ingredient_recolte[i],vivant_script.transform.position,vivant_script.ingredient_recolte[i].transform.rotation);
+                            yield return null;
                         }
 
-                        for (int j = 0; j < vivant_script.ingredient_recolte.Length; j++)//Pour chaque élément du tableau...
+                        for (int j = 0; j < vivant_script.ingredient_recolte.Length; j++)//Pour chaque ingredient dans le vivant
                         {
 
+                            //NE DEVRAIT JAMAIS ARRIVER
                             if (place_inventaire <= 0)
                             {
-                                break;
+                                yield return null;
                             }
 
                             if (inventaire[i] == null)                       //S'il y a un espace vide
                             {
-                                //Debug.Log(vivant_script.ingredient_recolte[i]+" "+i);
                                 inventaire[i] = vivant_script.ingredient_recolte[j]; //On met l'ingrédient dedans
-                                //Debug.Log(inventaire[i]);
-                                place_inventaire--;
-                                vivant_script.ingredient_recolte[i] = null;
+                                place_inventaire--; Debug.Log(place_inventaire);
+                                vivant_script.ingredient_recolte[j] = null;
                                 change = true;
                                 break;
                             }
@@ -520,9 +522,14 @@ public class Player : MonoBehaviour {
 
                         if (change == true)
                         {
-                            break;
+                            yield return null;
                         }
 
+                    }
+
+                    if (vivant_script.destroy_si_recolte == true)
+                    {
+                        Destroy(vivant_script.gameObject);
                     }
                 }
             }
