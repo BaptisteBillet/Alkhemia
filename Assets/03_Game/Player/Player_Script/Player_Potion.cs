@@ -17,7 +17,8 @@ public class Player_Potion : MonoBehaviour
     //Les potions
     public Potion potion_feu;     //potion_script = (Potion)potion_feu.GetComponent(typeof(Potion));
     public Potion potion_toxic; //potion_script = (Potion)potion_toxic.GetComponent(typeof(Potion));
-    //public Potion potion_vent;  //potion_script = (Potion)potion_vent.GetComponent(typeof(Potion));
+    public Potion potion_vent;
+   
 
     //La potion utilisé actuellement
     public int potion_actuel;
@@ -67,12 +68,24 @@ public class Player_Potion : MonoBehaviour
 
         //Et on lui indique son numéro
         potion_script_1.numero = 1;
-        
-        //On désactive cette potion car ce n'est pas celle séléctionné pour le moment
-        //tab_potion[1].gameObject.SetActive(false);
 
 
+        ///VENT
 
+        //On rend existance une potion
+        potion_instance = Instantiate(potion_vent) as Potion; //Instantiation
+        potion_instance.transform.parent = transform; //CHILD
+        potion_instance.transform.position = transform.position;
+
+        potion_instance.fleche = fleche;
+
+        //Pour le moment cette potion devient la deuxième du tableau, et elle est inactive
+        tab_potion[2] = potion_instance;
+        //On s'assure de pouvoir y accéder en tout temps.
+        potion_script_2 = (Potion)tab_potion[2].GetComponent(typeof(Potion));
+
+        //Et on lui indique son numéro
+        potion_script_2.numero = 2;
 
 
     }
