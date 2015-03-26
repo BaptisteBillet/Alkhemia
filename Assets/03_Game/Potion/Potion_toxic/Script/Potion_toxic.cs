@@ -118,7 +118,7 @@ public class Potion_toxic : Potion
 
 
 
-        if ((Input.GetAxis("TriggersR_1") == 1 || Input.GetMouseButton(0)) && gachette_actif == 0)// && (Mathf.Abs(Input.GetAxis("R_XAxis_1")) + Mathf.Abs(Input.GetAxis("R_YAxis_1")) >= 0.9f))
+        if ((Input.GetAxis("TriggersR_1") == 1 || Input.GetMouseButton(0)) && gachette_actif == 0 && BagManager.instance.m_CanShoot == true)// && (Mathf.Abs(Input.GetAxis("R_XAxis_1")) + Mathf.Abs(Input.GetAxis("R_YAxis_1")) >= 0.9f))
         {
             gachette_actif = 1;
 
@@ -131,7 +131,7 @@ public class Potion_toxic : Potion
 
 
 
-        if (gachette_actif == 1 && player_potion_script.potion_actuel == numero)
+        if (gachette_actif == 1 && player_potion_script.potion_actuel == numero )
         {
             gachette_actif = 2;
             StartCoroutine(debit());
@@ -197,9 +197,9 @@ public class Potion_toxic : Potion
 
 
 
-        if (((Input.GetMouseButtonDown(1) || gachette_sort == true) && quantite - sort_depense >= 0) && player_potion_script.potion_actuel == numero)
+        if (((Input.GetMouseButtonDown(1) || gachette_sort == true) && quantite - sort_depense >= 0) && player_potion_script.potion_actuel == numero && BagManager.instance.m_CanShoot == true)
         {
-           
+            Debug.Log("toxic");
             //Dépense
             quantite -= sort_depense;
 

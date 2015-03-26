@@ -83,6 +83,9 @@ public class Player : MonoBehaviour {
     public GameObject[] inventaire = new GameObject[1];
     public int place_inventaire;
 
+    //Accès à l'ingredient
+    private Ingredient ingredient;
+
     //temps invincible après touché
     public float temps_invincible;
 
@@ -512,8 +515,13 @@ public class Player : MonoBehaviour {
 
                             if (inventaire[i] == null)                       //S'il y a un espace vide
                             {
+                                ingredient = vivant_script.ingredient_recolte[j].GetComponent<Ingredient>();
+                                ingredient.PlayerPosition = this.transform;
+                                ingredient.IsInInventaire = true;
+                                ingredient.index_inventaire = i;
                                 inventaire[i] = vivant_script.ingredient_recolte[j]; //On met l'ingrédient dedans
-                                place_inventaire--; Debug.Log(place_inventaire);
+                               
+                                place_inventaire--;
                                 vivant_script.ingredient_recolte[j] = null;
                                 change = true;
                                 break;
