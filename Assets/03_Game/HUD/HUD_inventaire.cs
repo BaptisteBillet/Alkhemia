@@ -25,10 +25,17 @@ public class HUD_inventaire : MonoBehaviour {
 	void Start () {
         ajout = false;
         player_script = (Player)player.GetComponent(typeof(Player));
-       
+        
         
 	}
 	
+    public void drop_inventaire(int index)
+    {
+        player_script.inventaire[index] = null;
+        player_script.place_inventaire++;
+
+    }
+
     void actualisation_inventaire()
     {
         for(int i=0;i<player_script.inventaire.Length;i++)
