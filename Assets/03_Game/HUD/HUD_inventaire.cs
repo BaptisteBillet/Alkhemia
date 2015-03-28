@@ -11,6 +11,7 @@ public class HUD_inventaire : MonoBehaviour {
     public GameObject I_fruit_rare;
     public GameObject I_cendre;
     public GameObject I_essence;
+    public GameObject I_pommedepin;
 
     public GameObject player;
     private Player player_script;
@@ -92,6 +93,15 @@ public class HUD_inventaire : MonoBehaviour {
                         if (ingredient_script.name == "rare")
                         {
                             ingredient = Instantiate(I_fruit_rare) as GameObject;
+                            ingredient.transform.parent = place[i].transform;
+                            ingredient.transform.localPosition = new Vector3(0, 0, 0);
+                            ingredient.transform.localScale = new Vector3(1f, 1f, 1);
+                            ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+                        }
+                        if (ingredient_script.name == "pommedepin")
+                        {
+                            ingredient = Instantiate(I_pommedepin) as GameObject;
                             ingredient.transform.parent = place[i].transform;
                             ingredient.transform.localPosition = new Vector3(0, 0, 0);
                             ingredient.transform.localScale = new Vector3(1f, 1f, 1);

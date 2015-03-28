@@ -376,7 +376,7 @@ public class Player : MonoBehaviour {
             {
                 recolte_en_cours = true;
                 //Contact avec un Vivant 
-                if (other.gameObject.tag == "vivant")
+                if (other.gameObject.tag == "vivant" && other.gameObject!=this.gameObject && other.gameObject!=this.gameObject.transform.parent)
                 {
                     vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
 

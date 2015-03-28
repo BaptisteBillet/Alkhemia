@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class fraisier_animation : MonoBehaviour {
+public class recoltable_animation : MonoBehaviour {
 
-    public Vivant vivant_script;
+    private Vivant vivant_script;
 
     Animator anim;
 	// Use this for initialization
     void Start()
     {
+        vivant_script = GetComponent<Vivant>();
         anim = this.gameObject.GetComponent<Animator>();
     }
 	// Update is called once per frame

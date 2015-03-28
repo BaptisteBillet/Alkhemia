@@ -22,7 +22,7 @@ public class potion_hud : MonoBehaviour {
 
 
         player_potion_script = (Player_Potion)Player.GetComponent(typeof(Player_Potion));
-
+        
         switch(numero_potion)
         {
                 case 1:
@@ -39,6 +39,7 @@ public class potion_hud : MonoBehaviour {
                 break;
 
         }
+
         potion_max = potion_script.quantite;
        
         potion_actuel = potion_script.quantite * 100 / potion_max;

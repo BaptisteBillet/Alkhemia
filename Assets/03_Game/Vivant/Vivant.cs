@@ -29,6 +29,8 @@ public class Vivant : MonoBehaviour {
     public bool destroy_si_recolte; //Détruit quand récolté
     public float temps_recolte;   //Temps nécessaire la récolte
 
+    public bool recolte_vent;
+
     //Ingrédient recolte
     public GameObject[] ingredient_recolte = new GameObject[5];
 
@@ -42,6 +44,7 @@ public class Vivant : MonoBehaviour {
 
     private Player player_script;
     private Vivant vivant_script;
+    private Bullet bullet_script;
 
     private float temps_invincible=1;
 
@@ -224,8 +227,10 @@ public class Vivant : MonoBehaviour {
 
     #endregion
 
+
     void OnTriggerEnter2D(Collider2D col)
     {
+       
         if (col.tag == "vivant" || col.tag == "Player")
         {
             agresseur = col.gameObject;
@@ -254,7 +259,28 @@ public class Vivant : MonoBehaviour {
             {
                 agresseur = col.gameObject.transform.parent.parent.gameObject;
             }
-            
+        }
+        
+        if (recolte_vent == true)
+        {
+            if (col.gameObject.tag == "bullet")
+            {
+                bullet_script = col.gameObject.GetComponent<Bullet>();
+                if (bullet_script.name == "bullet_vent")
+                {
+                    if (recolte_fait == false && producteur_ok == true)
+                    {
+                        recolte_fait = true;
+                        producteur_ok = false;
+                        if (destroy_si_recolte == true)
+                        {
+                            Destroy(this.gameObject);
+                        }
+
+                        Instantiate(ingredient_recolte[0], this.gameObject.transform.position, ingredient_recolte[0].transform.rotation);
+                    }
+                }
+            }
         }
     }
    

@@ -118,21 +118,23 @@ public class Bullet : MonoBehaviour {
         {
 
             vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-            if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
-            {
-                vivant_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+            Debug.Log(other);
 
-                if (vivant_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
+                if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
                 {
-                    vivant_script.dps_process(duree_degat, duree_temps, duree_intervalle, statut_bullet, temps_statut);
-                }
+                    vivant_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
-                if (impact_mort == true)
-                {
-                    Destroy(this.gameObject);
-                }
-            }
+                    if (vivant_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
+                    {
+                        vivant_script.dps_process(duree_degat, duree_temps, duree_intervalle, statut_bullet, temps_statut);
+                    }
 
+                    if (impact_mort == true)
+                    {
+                        Destroy(this.gameObject);
+                    }
+                }
+            
         }
 
         if (other.gameObject.tag == "mur")
