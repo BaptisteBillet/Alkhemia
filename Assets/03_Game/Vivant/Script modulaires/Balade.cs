@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Balade : MonoBehaviour {
 
+    //SPECIAL PAPILLON////
+    public bool Papillon;
 
     //BALADE///////////////////////////////////////////////////////////////////////////
 
@@ -94,12 +96,25 @@ public class Balade : MonoBehaviour {
             anim = source_sprite.GetComponent<Animator>();
             anim.SetBool("moving", false);
         }
+
     }
 
-
+    IEnumerator haut_bas()
+    {
+        while(balade_en_cours==false)
+        {
+            up = !up;
+            down = !down;
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
 
     IEnumerator pause_balade()
     {
+        if (Papillon == true)
+        {
+            StartCoroutine(haut_bas());
+        }
         //TEMPS/////////////////////////////////////////////////////////////
 
         if (temps_pause_aleatoire == true) //Si le temps est aléatoire
@@ -130,7 +145,6 @@ public class Balade : MonoBehaviour {
         //SI c'est aléatoire
         if (balade_aleatoire == true)
         {
-           
             //On s'assure que le max soit plus grand que le min
             if (max_distance <= min_distance)
             {
@@ -185,11 +199,8 @@ public class Balade : MonoBehaviour {
         yield return null;
     }
 
-  
-
     void Update()
     {
-
         if (balade_en_cours == true)
         {
             deplacement();
@@ -198,7 +209,7 @@ public class Balade : MonoBehaviour {
             animation();
         }
 
-        if(balade_en_cours==false)
+        if(balade_en_cours==false && Papillon==false)
         {
             up = false;
             down = false;
@@ -209,6 +220,13 @@ public class Balade : MonoBehaviour {
             moveSpeed = 0;
             move = false;
             //anim.SetBool("moving", move);
+        }
+
+        if(balade_en_cours==false && Papillon==true)
+        {
+            vecteur();
+            acc_des();
+            animation();
         }
 
     }
@@ -301,7 +319,7 @@ public class Balade : MonoBehaviour {
         if (left == true && !up && !down)
         {
             velocity = new Vector3(-1, 0, 0);
-            if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90); } //transform.Rotate(Vector3.forward * Time.deltaTime * 100); 
+            if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90); } 
 
         }
         if (right == true && !up && !down)
@@ -333,7 +351,7 @@ public class Balade : MonoBehaviour {
 
         //Déplacements
         GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
-
+        
     }
 
     void animation()

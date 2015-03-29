@@ -53,6 +53,7 @@ public class Player : MonoBehaviour {
     public bool immortel;   //Immortalité
     public float life;        //vie
     public float life_max;
+    public float life_alerte;
     //Pour les récoltes, depessages etc
     public bool busy;
 
@@ -99,10 +100,12 @@ public class Player : MonoBehaviour {
 
     private string direction="null";
 
+    //Pour le camera shake de la vie faible
+    public bool alertelaunched;
+
     ///////////////////////////////////////////////////////
 	void Awake ()
     {
-        
         donjon_script = (Donjon)donjon.GetComponent(typeof(Donjon));
         delay = 0; //Doit rester à 0
 
@@ -143,6 +146,8 @@ public class Player : MonoBehaviour {
         
         //Positionnement layer
         sprite.sortingOrder = (int)(this.gameObject.transform.position.y * 10) * -1;
+
+        life_alerte = 20 * life_max / 100;
     }
 
     IEnumerator couldown()
@@ -186,6 +191,12 @@ public class Player : MonoBehaviour {
         //Positionnement layer
         sprite.sortingOrder = (int)(this.gameObject.transform.position.y * 10) * -1;  //////////////////////////////////////////////à prio j'ai foutu le bordel sur les layers <3 (Ryan)
         
+        //system d'alerte
+        if(life<=life_alerte && alertelaunched==false)
+        {
+            alertelaunched = true;
+            ShakeManager.instance.LetsShakeLife(this);
+        }
 
         
     }
@@ -242,6 +253,7 @@ public class Player : MonoBehaviour {
 
     public void impact_process(float degat_impact, string statut_impact, float temps_impact)
     {
+        ShakeManager.instance.LetsShake();
         StartCoroutine(impact(degat_impact, statut_impact, temps_impact));
     }
 
@@ -492,7 +504,7 @@ public class Player : MonoBehaviour {
 
                     //on fini l'animation de récolte 
                     anim.SetTrigger("recolting_end");
-
+                    Ouverture_sac.instance.letsTremble();
                     bool change = false;
 
                     for (int i = 0; i < inventaire.Length; i++)   //Pour chaque case de l'inventaire...
@@ -645,6 +657,7 @@ public class Player : MonoBehaviour {
 
     void directions()
     {
+        
         if (Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("L_YAxis_1") < 0) || Input.GetKey(KeyCode.Z))
         {
             up = true;
@@ -810,6 +823,7 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
+        
         //Déplacements
         if (general_time > 0 && life > 0) //Si le joueur est en vie
         {

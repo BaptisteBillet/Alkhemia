@@ -14,6 +14,7 @@ public class Explosion : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ShakeManager.instance.LetsShake(300);
         Destroy(this.gameObject, 1f);
     }
 
