@@ -24,7 +24,7 @@ public class bullet_toxic : Bullet {
                 player_script = (Player)other.gameObject.GetComponent(typeof(Player));
                 if (player_script.immortel == false) //SI le vivant n'est pas immortel
                 {
-                    player_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+                    player_script.impact_process(this.transform,impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
                     if (player_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
                     {
@@ -49,7 +49,7 @@ public class bullet_toxic : Bullet {
             if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
             {
 
-                vivant_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+                vivant_script.impact_process(this.transform,impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
                 if (vivant_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
                 {

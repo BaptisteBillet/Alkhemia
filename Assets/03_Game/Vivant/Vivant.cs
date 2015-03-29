@@ -9,7 +9,6 @@ using System.Collections.Generic;
 public class Vivant : MonoBehaviour {
 
     //BASE
-    public string name;     //Le nom du vivant
 
     public string categorie; // plante_agressive plante_passive , monstre_agressif monstre_passif
 
@@ -143,7 +142,7 @@ public class Vivant : MonoBehaviour {
 
     }
 
-    public void impact_process(float degat_impact, string statut_impact, float temps_impact)
+	public void impact_process(Transform position_agresseur, float degat_impact, string statut_impact, float temps_impact)
     {
         if (non_tuable == false)
         {

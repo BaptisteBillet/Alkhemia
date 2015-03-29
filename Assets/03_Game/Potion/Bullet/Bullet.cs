@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-    public string name;         //Nom de la bullet
-
     public string statut_bullet;       //Statut de la potion         
     public float temps_statut; //Temps avant que la cible ne soit plus empoisonné, electrifié, en feu... 
 
@@ -46,7 +44,7 @@ public class Bullet : MonoBehaviour {
                 player_script = (Player)other.gameObject.GetComponent(typeof(Player));
                 if (player_script.immortel == false) //SI le vivant n'est pas immortel
                 {
-                    player_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+                    player_script.impact_process(this.gameObject.transform,impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
                     if (player_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
                     {
@@ -70,7 +68,7 @@ public class Bullet : MonoBehaviour {
                 if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
                 {
 
-                    vivant_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+                    vivant_script.impact_process(this.gameObject.transform ,impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
                     if (vivant_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
                     {
@@ -98,7 +96,7 @@ public class Bullet : MonoBehaviour {
             player_script = (Player)other.gameObject.GetComponent(typeof(Player));
             if (player_script.immortel == false) //SI le vivant n'est pas immortel
             {
-                player_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+                player_script.impact_process(this.gameObject.transform, impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
                 if (player_script.statut != statut_bullet && duree_degat>0) //Si il n'est pas immunisé
                 {
@@ -122,13 +120,13 @@ public class Bullet : MonoBehaviour {
 
                 if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
                 {
-                    vivant_script.impact_process(impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+                    vivant_script.impact_process(this.gameObject.transform, impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
                     if (vivant_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
                     {
                         vivant_script.dps_process(duree_degat, duree_temps, duree_intervalle, statut_bullet, temps_statut);
                     }
-
+					
                     if (impact_mort == true)
                     {
                         Destroy(this.gameObject);

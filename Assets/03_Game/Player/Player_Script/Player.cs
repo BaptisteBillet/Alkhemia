@@ -103,10 +103,13 @@ public class Player : MonoBehaviour {
     //Pour le camera shake de la vie faible
     public bool alertelaunched;
 
+	private Rigidbody2D rigidbody;
+
     ///////////////////////////////////////////////////////
 	void Awake ()
     {
         donjon_script = (Donjon)donjon.GetComponent(typeof(Donjon));
+		rigidbody = GetComponent<Rigidbody2D>();
         delay = 0; //Doit rester à 0
 
         #region Initialisation
@@ -251,15 +254,16 @@ public class Player : MonoBehaviour {
     }
 
 
-    public void impact_process(float degat_impact, string statut_impact, float temps_impact)
+    public void impact_process(Transform position_agresseur, float degat_impact, string statut_impact, float temps_impact)
     {
-        ShakeManager.instance.LetsShake();
-        StartCoroutine(impact(degat_impact, statut_impact, temps_impact));
+        ShakeManager.instance.LetsShake(true);
+        StartCoroutine(impact(position_agresseur,degat_impact, statut_impact, temps_impact));
     }
 
     //Dégât à l'impact
-    public IEnumerator impact(float degat_impact, string statut_impact, float temps_impact)
+    public IEnumerator impact(Transform position_agresseur,float degat_impact, string statut_impact, float temps_impact)
     {
+		Vector3 dir= (this.transform.position-position_agresseur.position).normalized;
 
         //Si on est pas insensibilisé
         if (statut != statut_impact || statut_impact=="normal")
@@ -391,7 +395,7 @@ public class Player : MonoBehaviour {
                 if (other.gameObject.tag == "vivant" && other.gameObject!=this.gameObject && other.gameObject!=this.gameObject.transform.parent)
                 {
                     vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-
+					
                     //Récolte possible
                     if (vivant_script.producteur == true && vivant_script.producteur_ok == true && vivant_script.recolte_fait == false)
                     {
@@ -516,9 +520,7 @@ public class Player : MonoBehaviour {
                             yield return null;
                         }
 
-                        for (int j = 0; j < vivant_script.ingredient_recolte.Length; j++)//Pour chaque ingredient dans le vivant
-                        {
-
+                       
                             //NE DEVRAIT JAMAIS ARRIVER
                             if (place_inventaire <= 0)
                             {
@@ -527,18 +529,20 @@ public class Player : MonoBehaviour {
 
                             if (inventaire[i] == null)                       //S'il y a un espace vide
                             {
-                                ingredient = vivant_script.ingredient_recolte[j].GetComponent<Ingredient>();
+
+                                ingredient = vivant_script.ingredient_recolte[0].GetComponent<Ingredient>();
+
                                 ingredient.PlayerPosition = this.transform;
                                 ingredient.IsInInventaire = true;
                                 ingredient.index_inventaire = i;
-                                inventaire[i] = vivant_script.ingredient_recolte[j]; //On met l'ingrédient dedans
+                                inventaire[i] = vivant_script.ingredient_recolte[0]; //On met l'ingrédient dedans
                                
                                 place_inventaire--;
-                                vivant_script.ingredient_recolte[j] = null;
+                                vivant_script.ingredient_recolte[0] = null;
                                 change = true;
                                 break;
                             }
-                        }
+                        
 
                         if (change == true)
                         {
@@ -763,18 +767,7 @@ public class Player : MonoBehaviour {
     {
         bool moving;
 
-        //ANIMATION
-
-        // UP / Down
-        /*if (velocity.y == 1)
-        {
-            anim.SetBool("down", false);
-        }
-        if (velocity.y == -1)
-        {
-            anim.SetBool("down", true);
-        }*/
-
+        
         // Left / Right
         if (velocity.x == 1)
         {
@@ -784,25 +777,7 @@ public class Player : MonoBehaviour {
         {
             anim.SetBool("right", false);
         }
-        /*
-        //Diagonals
-        if (velocity == new Vector3(1, 1, 0))
-        {
-            move = 2;
-        }
-        if (velocity == new Vector3(1, -1, 0))
-        {
-            move = 2;
-        }
-
-        if (velocity == new Vector3(-1, -1, 0))
-        {
-            move = 4;
-        }
-        if (velocity == new Vector3(-1, 1, 0))
-        {
-            move = 4;
-        }*/
+      
         //Pas de vitesse
         if(moveSpeed==0)
         {

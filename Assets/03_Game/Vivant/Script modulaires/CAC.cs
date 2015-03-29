@@ -21,7 +21,7 @@ public class CAC : MonoBehaviour {
 
                     player_script = (Player)other.gameObject.GetComponent(typeof(Player));
                     
-                    player_script.impact_process(main_script.degat_impact, main_script.statut, main_script.temps_statut);
+                    player_script.impact_process(this.transform,main_script.degat_impact, main_script.statut, main_script.temps_statut);
                 }
             }
 
@@ -30,7 +30,7 @@ public class CAC : MonoBehaviour {
                 if (main_script.degat_impact > 0)
                 {
                     vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-                    vivant_script.impact_process(main_script.degat_impact, main_script.statut, main_script.temps_statut);
+					vivant_script.impact_process(this.transform,main_script.degat_impact, main_script.statut, main_script.temps_statut);
                 }
             }
         

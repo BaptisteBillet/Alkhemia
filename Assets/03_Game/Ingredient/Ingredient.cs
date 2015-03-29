@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Ingredient : MonoBehaviour 
 {
-    public string name;
     public Element element;
     public bool IsInInventaire;
 
@@ -35,10 +34,33 @@ public class Ingredient : MonoBehaviour
     {
         if(IsInInventaire)
         {
-            Instantiate(Origin, PlayerPosition.position, this.transform.rotation);
-            BagManager.instance.m_HUDInventaire.drop_inventaire(index_inventaire);
+			if(Autel.instance)
+			{
+				if (Autel.instance.ReadyForChange)
+				{
+					Autel.instance.autel_activation(Origin);
+				}
+				else
+				{
+					Instantiate(Origin, PlayerPosition.position, this.transform.rotation);
+				}
+			}
+			
+			if(Marchand.instance)
+			{
+				if (Marchand.instance.ReadyForChange)
+				{
+					Marchand.instance.autel_activation(Origin);
+				}
+				else
+				{
+					Instantiate(Origin, PlayerPosition.position, this.transform.rotation);
+				}
+			}
 
-            BagManager.instance.m_CanShoot = true;
+			BagManager.instance.m_HUDInventaire.drop_inventaire(index_inventaire);
+
+			BagManager.instance.m_CanShoot = true;
             Destroy(this.gameObject);
         }
     }

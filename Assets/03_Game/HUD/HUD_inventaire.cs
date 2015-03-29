@@ -45,12 +45,13 @@ public class HUD_inventaire : MonoBehaviour {
             {
                 if (player_script.inventaire[i] != null)
                 {
-                    ingredient_script = (Ingredient)player_script.inventaire[i].GetComponent(typeof(Ingredient));
 
+                    ingredient_script = (Ingredient)player_script.inventaire[i].GetComponent(typeof(Ingredient));
+					Debug.Log(ingredient_script.name);
                     if (place[i].transform.childCount == 0)
                     {
-
-                        if (ingredient_script.name == "fraise")
+						
+                        if (ingredient_script.name == "I_Fraise")
                         {
                             ingredient = Instantiate(I_fraise) as GameObject;
                             ingredient.transform.parent = place[i].transform;
@@ -60,8 +61,9 @@ public class HUD_inventaire : MonoBehaviour {
 
                         }
 
-                        if (ingredient_script.name == "cendre")
-                        {
+                        if (ingredient_script.name == "I_cendre")
+						{
+							
                             ingredient = Instantiate(I_cendre) as GameObject;
                             ingredient.transform.parent = place[i].transform;
                             ingredient.transform.localPosition = new Vector3(0, 0, 0);
@@ -70,7 +72,7 @@ public class HUD_inventaire : MonoBehaviour {
 
                         }
 
-                        if (ingredient_script.name == "essence")
+                        if (ingredient_script.name == "I_essence")
                         {
                             ingredient = Instantiate(I_essence) as GameObject;
                             ingredient.transform.parent = place[i].transform;
@@ -80,7 +82,7 @@ public class HUD_inventaire : MonoBehaviour {
 
                         }
 
-                        if (ingredient_script.name == "touffe")
+                        if (ingredient_script.name == "I_touffe")
                         {
                             ingredient = Instantiate(I_touffe) as GameObject;
                             ingredient.transform.parent = place[i].transform;
@@ -90,7 +92,7 @@ public class HUD_inventaire : MonoBehaviour {
 
                         }
 
-                        if (ingredient_script.name == "rare")
+                        if (ingredient_script.name == "I_rare")
                         {
                             ingredient = Instantiate(I_fruit_rare) as GameObject;
                             ingredient.transform.parent = place[i].transform;
@@ -99,7 +101,7 @@ public class HUD_inventaire : MonoBehaviour {
                             ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
                         }
-                        if (ingredient_script.name == "pommedepin")
+                        if (ingredient_script.name == "I_pommedepin")
                         {
                             ingredient = Instantiate(I_pommedepin) as GameObject;
                             ingredient.transform.parent = place[i].transform;

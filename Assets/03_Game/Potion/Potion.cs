@@ -5,8 +5,6 @@ public class Potion : MonoBehaviour {
 
     public int last_actual;
 
-    public string name;         //Nom de la potion
-
     public int quantite;        //quel quantité
 
     public bool active;         //Si la potion est utilisé 

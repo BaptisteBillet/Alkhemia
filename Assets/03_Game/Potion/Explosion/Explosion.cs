@@ -14,7 +14,7 @@ public class Explosion : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ShakeManager.instance.LetsShake(300);
+        ShakeManager.instance.LetsShake(false,300);
         Destroy(this.gameObject, 1f);
     }
 
@@ -29,7 +29,7 @@ public class Explosion : MonoBehaviour
            
                 player_script = (Player)other.gameObject.GetComponent(typeof(Player));
 
-                player_script.impact_process(degats, "feu", 2);
+                player_script.impact_process(this.transform,degats, "feu", 2);
             
         }
 
@@ -37,7 +37,7 @@ public class Explosion : MonoBehaviour
         {
 
                 vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-                vivant_script.impact_process(degats, "feu", 2);
+                vivant_script.impact_process(this.transform,degats, "feu", 2);
 
         }
 
