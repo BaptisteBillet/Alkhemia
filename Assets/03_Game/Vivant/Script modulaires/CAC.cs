@@ -15,8 +15,7 @@ public class CAC : MonoBehaviour {
        
             if (other.tag == "Player")
             {
-                
-                if (main_script.degat_impact > 0)
+                if (main_script.degat_impact > 0) 
                 {
 
                     player_script = (Player)other.gameObject.GetComponent(typeof(Player));

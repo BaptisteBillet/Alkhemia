@@ -22,11 +22,20 @@ public class Bullet : MonoBehaviour {
 
     public GameObject source_degat;
 
+	public GameObject fongus;
     void Start()
     {
         if (duree_mort == true)
         {
-            Destroy(this.gameObject, duree_temps);
+			if(fongus!=null)
+			{
+				Destroy(fongus, duree_temps);
+			}
+			else
+			{
+				Destroy(this.gameObject, duree_temps);
+			}
+           
         }
 
     }

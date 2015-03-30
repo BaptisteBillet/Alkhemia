@@ -21,9 +21,6 @@ public class Plante_gaz : Vivant {
         name = "Plante_gaz";
         statut = "toxic";
         immortel = false;
-        //Initialisation Cloud
-        delay_new_fongus_cloud = 5;
-        time_fongus_life=2;
 
         
         StartCoroutine(fongus());
@@ -35,16 +32,17 @@ public class Plante_gaz : Vivant {
     {
         while(life>0)
         {
-
             //création du nuage
             toxic_nuage = Instantiate(toxic_nuage_prefab) as GameObject; //Instantiation
-            toxic_nuage.transform.parent = transform;
-            toxic_nuage.transform.localPosition = new Vector3(-1,2.2f,0);
-            
+
+			toxic_nuage.transform.position = this.transform.parent.position;
+			//toxic_nuage.transform.parent = transform;
+            //toxic_nuage.transform.localPosition = new Vector3(-1,2.2f,0);
+            /*
             toxic_nuage_script = (Bullet)toxic_nuage.GetComponent(typeof(Bullet));
 
             toxic_nuage.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            StartCoroutine(kill_fongus());
+           */
 
             yield return new WaitForSeconds(delay_new_fongus_cloud);
             
@@ -54,15 +52,7 @@ public class Plante_gaz : Vivant {
         yield return null;
     }
     // Destruction des nuages toxic avec le temps
-    IEnumerator kill_fongus()
-    {
-
-        yield return new WaitForSeconds(time_fongus_life);
-        Destroy(toxic_nuage.gameObject);
-        yield return null;
-    }
-
-
+  
     void Update()
     {
         if(life<=0)

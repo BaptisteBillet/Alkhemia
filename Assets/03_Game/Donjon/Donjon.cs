@@ -10,7 +10,7 @@ public class Donjon : MonoBehaviour {
         
         //Tableau des rooms à instancier
         public List<GameObject> set1 = new List<GameObject>();
-        public List<GameObject> set2 = new List<GameObject>();
+        //public List<GameObject> set2 = new List<GameObject>();
         
         //Liste des set déjà fait
         public List<int> set_memory = new List<int>();
@@ -68,7 +68,7 @@ public class Donjon : MonoBehaviour {
 
 
         //Ajout des set dans la matrice
-        matrice.Add(set1); matrice.Add(set2);
+        matrice.Add(set1); //matrice.Add(set2);
 
         //Choix aléatoire de la room
 

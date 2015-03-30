@@ -238,26 +238,33 @@ public class Vivant : MonoBehaviour {
         if(col.tag=="bullet")
         {
             //Un niveau
-            if (col.gameObject.transform.parent.gameObject.tag == "vivant")
-            {
-               agresseur = col.gameObject.transform.parent.gameObject;
-            }
+			if (col.transform.parent)
+			{
+				if (col.gameObject.transform.parent.gameObject.tag == "vivant")
+				{
+					agresseur = col.gameObject.transform.parent.gameObject;
+				}
 
-            if (col.gameObject.transform.parent.gameObject.tag == "Player")
-            {
-                agresseur = col.gameObject.transform.parent.gameObject;
-            }
+				if (col.gameObject.transform.parent.gameObject.tag == "Player")
+				{
+					agresseur = col.gameObject.transform.parent.gameObject;
+				}
 
-            //Deux niveaux
-            if (col.gameObject.transform.parent.parent.gameObject.tag == "vivant")
-            {
-                agresseur = col.gameObject.transform.parent.parent.gameObject;
-            }
+				if (col.transform.parent.parent)
+				{
+					//Deux niveaux
+					if (col.gameObject.transform.parent.parent.gameObject.tag == "vivant")
+					{
+						agresseur = col.gameObject.transform.parent.parent.gameObject;
+					}
 
-            if (col.gameObject.transform.parent.parent.gameObject.tag == "Player")
-            {
-                agresseur = col.gameObject.transform.parent.parent.gameObject;
-            }
+					if (col.gameObject.transform.parent.parent.gameObject.tag == "Player")
+					{
+						agresseur = col.gameObject.transform.parent.parent.gameObject;
+					}
+				}
+			}
+			
         }
         
         if (recolte_vent == true)
