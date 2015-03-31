@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class Detection : MonoBehaviour
 {
-
     //Accès au IA_Manager
     //public GameObject prioritaire;
     public GameObject cible;
     private GameObject nouvelle_cible;
     private string last_statut;
+
+	public TarentuletteBlock Block;
     //categorie recherché
     [System.Serializable]
     public struct recherche
@@ -36,6 +37,7 @@ public class Detection : MonoBehaviour
 
     private float test;
     private float test_cible;
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -135,6 +137,14 @@ public class Detection : MonoBehaviour
                     cible = cible_probable[i];
                     player_script = (Player)cible.GetComponent(typeof(Player));
                     last_statut = player_script.statut;
+					//Sommeil
+					if(Block!=null)
+					{
+						if(Block.IsBlock==false)
+						{
+							Block.LetsBlock();
+						}
+					}
                     break;
                 }
                 else if (cible_probable[i].tag == "vivant")//Si c'est un vivant
