@@ -49,7 +49,7 @@ public class bullet_toxic : Bullet {
             //DEGAT PLAYER
             
         }
-		Debug.Log(other.gameObject);
+
 		
         if (other.gameObject.tag == "vivant") //Si l'on touche un vivant et que ce n'est pas notre parent
         {

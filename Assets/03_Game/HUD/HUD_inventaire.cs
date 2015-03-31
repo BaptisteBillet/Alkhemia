@@ -12,6 +12,7 @@ public class HUD_inventaire : MonoBehaviour {
     public GameObject I_cendre;
     public GameObject I_essence;
     public GameObject I_pommedepin;
+    public GameObject I_champignon;
 
     public GameObject player;
     private Player player_script;
@@ -47,7 +48,7 @@ public class HUD_inventaire : MonoBehaviour {
                 {
 
                     ingredient_script = (Ingredient)player_script.inventaire[i].GetComponent(typeof(Ingredient));
-					Debug.Log(ingredient_script.name);
+
                     if (place[i].transform.childCount == 0)
                     {
 						
@@ -104,6 +105,15 @@ public class HUD_inventaire : MonoBehaviour {
                         if (ingredient_script.name == "I_pommedepin")
                         {
                             ingredient = Instantiate(I_pommedepin) as GameObject;
+                            ingredient.transform.parent = place[i].transform;
+                            ingredient.transform.localPosition = new Vector3(0, 0, 0);
+                            ingredient.transform.localScale = new Vector3(1f, 1f, 1);
+                            ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+                        }
+                        if (ingredient_script.name == "I_champignon")
+                        {
+                            ingredient = Instantiate(I_champignon) as GameObject;
                             ingredient.transform.parent = place[i].transform;
                             ingredient.transform.localPosition = new Vector3(0, 0, 0);
                             ingredient.transform.localScale = new Vector3(1f, 1f, 1);

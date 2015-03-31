@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: cb558794d5d772142a6f71c3c09c099c
+timeCreated: 1427819732
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Tarentulette_spritesheet_0
@@ -28,6 +30,7 @@ TextureImporter:
     21300046: Tarentulette_spritesheet_23
     21300048: Tarentulette_spritesheet_24
     21300050: Tarentulette_spritesheet_25
+    21300052: Tarentulette_spritesheet_26
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -46,6 +49,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -56,6 +62,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -76,8 +83,8 @@ TextureImporter:
         y: 640
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_1
       rect:
@@ -86,8 +93,8 @@ TextureImporter:
         y: 640
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_2
       rect:
@@ -96,8 +103,8 @@ TextureImporter:
         y: 640
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_3
       rect:
@@ -106,8 +113,8 @@ TextureImporter:
         y: 640
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_4
       rect:
@@ -116,8 +123,8 @@ TextureImporter:
         y: 640
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_5
       rect:
@@ -126,28 +133,28 @@ TextureImporter:
         y: 640
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 480
+        y: 481
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_7
       rect:
         serializedVersion: 2
         x: 160
-        y: 480
+        y: 481
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_8
       rect:
@@ -156,8 +163,8 @@ TextureImporter:
         y: 480
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_9
       rect:
@@ -166,8 +173,8 @@ TextureImporter:
         y: 480
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_10
       rect:
@@ -176,8 +183,8 @@ TextureImporter:
         y: 480
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_11
       rect:
@@ -186,8 +193,8 @@ TextureImporter:
         y: 480
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_12
       rect:
@@ -196,8 +203,8 @@ TextureImporter:
         y: 320
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_13
       rect:
@@ -206,8 +213,8 @@ TextureImporter:
         y: 320
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_14
       rect:
@@ -216,8 +223,8 @@ TextureImporter:
         y: 320
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_15
       rect:
@@ -226,8 +233,8 @@ TextureImporter:
         y: 320
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_16
       rect:
@@ -236,8 +243,8 @@ TextureImporter:
         y: 320
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_17
       rect:
@@ -246,8 +253,8 @@ TextureImporter:
         y: 320
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_18
       rect:
@@ -256,8 +263,8 @@ TextureImporter:
         y: 160
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_19
       rect:
@@ -266,8 +273,8 @@ TextureImporter:
         y: 160
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_20
       rect:
@@ -276,8 +283,8 @@ TextureImporter:
         y: 160
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_21
       rect:
@@ -286,8 +293,8 @@ TextureImporter:
         y: 160
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_22
       rect:
@@ -296,8 +303,8 @@ TextureImporter:
         y: 160
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_23
       rect:
@@ -306,8 +313,8 @@ TextureImporter:
         y: 160
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_24
       rect:
@@ -316,8 +323,8 @@ TextureImporter:
         y: 0
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Tarentulette_spritesheet_25
       rect:
@@ -326,8 +333,20 @@ TextureImporter:
         y: 0
         width: 160
         height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Tarentulette_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 960
+        height: 800
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
