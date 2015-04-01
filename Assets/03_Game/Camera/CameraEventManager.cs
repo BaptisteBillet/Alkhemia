@@ -39,8 +39,8 @@ public class CameraEventManager : MonoBehaviour
     public static event EventAction onEvent;
 
     #region Singleton
-    static private CameraEventManager s_Instance;
-    static public CameraEventManager instance
+	static private CameraEventManager s_Instance;
+	static public CameraEventManager instance
     {
         get
         {
@@ -59,7 +59,7 @@ public class CameraEventManager : MonoBehaviour
 
     void Start()
     {
-        CameraEventManager.onEvent += (EventManagerType emt) => { Debug.Log("&"); };
+        QuestEventManager.onEvent += (EventManagerType emt) => { Debug.Log("&"); };
     }
 
     public static void emit(EventManagerType emt)

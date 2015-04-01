@@ -14,7 +14,7 @@ public class CameraEffect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CameraEventManager.onEvent += Effect;
+        QuestEventManager.onEvent += Effect;
 
         fisheye = GetComponent<Fisheye>();
         shakemanager = GetComponent<ShakeManager>();
@@ -31,7 +31,7 @@ public class CameraEffect : MonoBehaviour
 
     void OnDestroy()
     {
-        CameraEventManager.onEvent -= Effect;
+        QuestEventManager.onEvent -= Effect;
     }
 
 
@@ -95,18 +95,18 @@ public class CameraEffect : MonoBehaviour
         while (VignetteEffect)
         {
 
-            while(intensity_value<1.5f)
+            while(intensity_value<2f)
             {
-                intensity_value += 0.01f;
+                intensity_value += 0.1f;
                 vignette.intensity=intensity_value;
-                yield return new WaitForSeconds(Random.Range(2,5));
+                yield return new WaitForSeconds(Random.Range(1,2));
             }
 
             while (intensity_value > 0.5f)
             {
-                intensity_value -= 0.01f;
+                intensity_value -= 0.1f;
                 vignette.intensity = intensity_value;
-                yield return new WaitForSeconds(Random.Range(2, 5));
+                yield return new WaitForSeconds(Random.Range(1,2));
             }
 
         }

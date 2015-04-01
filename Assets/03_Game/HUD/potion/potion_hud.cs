@@ -56,11 +56,11 @@ public class potion_hud : MonoBehaviour {
 
         if(player_potion_script.potion_actuel==numero_apparition)
         {
-            selection.SetActive(true);
+            selection.SetActive(false);
         }
         else
         {
-            selection.SetActive(false);
+            selection.SetActive(true);
         }
 
 	}
