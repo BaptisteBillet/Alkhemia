@@ -59,7 +59,7 @@ public class Vivant : MonoBehaviour {
     public int dps_duree;        //Le temps de dps (combien de temps le contacts sera empoisoner.)
 
     //Sprite 
-    private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     public bool volumique; //Est ce que l'objet est solide ou est ce que le joueur marche librement dessus
 
     public GameObject agresseur;
@@ -74,12 +74,16 @@ public class Vivant : MonoBehaviour {
 
         temps_statut = 3;
 
-        sprite = GetComponent<SpriteRenderer>();
-        if (volumique == true)
+        if(sprite==null)
+        {
+            sprite = GetComponent<SpriteRenderer>();
+        }
+ 
+        if (volumique == true && sprite!=null)
         {
             sprite.sortingOrder = (int)this.gameObject.transform.position.y * 10 * -1;
         }
-        else
+        else if (sprite != null)
         {
             sprite.sortingLayerName = "Sol";
             sprite.sortingOrder = (int)-1;

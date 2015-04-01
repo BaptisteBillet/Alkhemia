@@ -55,10 +55,10 @@ public class bullet_toxic : Bullet {
         {
 			if (this.gameObject.transform.parent)
 			{
-				if (this.gameObject != transform.parent.parent)
+                if (this.gameObject != transform.parent.parent || this.gameObject != transform.parent)
 				{
 					vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-
+                   
 					if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
 					{
 

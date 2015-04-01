@@ -13,6 +13,9 @@ public class Tireur : MonoBehaviour
     public float vitesse;
 
     private Vector3 dir;
+
+
+
     void OnEnable()
     {
         StartCoroutine(tir());
@@ -22,19 +25,16 @@ public class Tireur : MonoBehaviour
     {
         while(this.enabled)
         {
-            
             //INSTANTIATION
             bullet = Instantiate(bullet_prefab, this.gameObject.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
 
-            //AJOUT en temps que child
-            bullet.transform.parent = transform;
             if (cible != null)
             {
                 dir = new Vector3(cible.transform.position.x - this.gameObject.transform.parent.transform.position.x,cible.transform.position.y- this.gameObject.transform.parent.transform.position.y,cible.transform.position.z);
                 //dir = cible.transform.position.normalized;
             }
             //ENVOI dans une direction
-            bullet.GetComponent<Rigidbody2D>().AddForce(dir * Time.deltaTime);
+            bullet.GetComponent<Rigidbody2D>().AddForce(dir * Time.deltaTime*vitesse);
             
             yield return new WaitForSeconds(frequence); 
             
@@ -42,6 +42,7 @@ public class Tireur : MonoBehaviour
 
         yield return null;
     }
+
 
 
 }

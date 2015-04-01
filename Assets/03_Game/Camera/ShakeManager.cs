@@ -46,6 +46,7 @@ public class ShakeManager : MonoBehaviour {
 
     public void LetsShake(bool rouge,float relative = 100, bool _shake_up = true, bool _shake_left = true)
     {
+        
         shake_up=_shake_up;
         shake_left=_shake_left;
         
@@ -55,8 +56,10 @@ public class ShakeManager : MonoBehaviour {
         }
 
         shakeAmt = relative * .0025f;
+        
         InvokeRepeating("CameraShake", 0, .01f);
         Invoke("StopShaking", 0.3f);
+        
     }
 
     public void LetsShakeLife(Player playerscript, float relative = 20)

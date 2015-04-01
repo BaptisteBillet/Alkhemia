@@ -108,7 +108,7 @@ public class Player : MonoBehaviour {
     ///////////////////////////////////////////////////////
 	void Awake ()
     {
-        donjon_script = (Donjon)donjon.GetComponent(typeof(Donjon));
+        //donjon_script = (Donjon)donjon.GetComponent(typeof(Donjon));
 		rigidbody = GetComponent<Rigidbody2D>();
         delay = 0; //Doit rester à 0
 
@@ -264,6 +264,7 @@ public class Player : MonoBehaviour {
     public IEnumerator impact(Transform position_agresseur,float degat_impact, string statut_impact, float temps_impact)
     {
 		Vector3 dir= (this.transform.position-position_agresseur.position).normalized;
+       
 
         //Si on est pas insensibilisé
         if (statut != statut_impact || statut_impact=="normal")
