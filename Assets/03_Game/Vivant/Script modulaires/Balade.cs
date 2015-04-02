@@ -34,7 +34,7 @@ public class Balade : MonoBehaviour {
     //DEPLACEMENT/////////////////////////////////////////////////////////////////////////
 
         //La destination
-        private Vector3 destination;
+        public Vector3 destination;
         //La distance entre le point actuel et la destination
         private float distance;
 
@@ -72,7 +72,7 @@ public class Balade : MonoBehaviour {
         public GameObject source_sprite;    
 
         //Animation
-        Animator anim;
+        public Animator anim;
 
 	// Use this for initialization
 	void OnEnable()
@@ -121,9 +121,11 @@ public class Balade : MonoBehaviour {
         {
             temps_pause = Random.Range(min_temps_pause, max_temps_pause);
         }
-        
 
         pause_en_cours = true;
+
+		anim.SetBool("moving", false);
+		GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         yield return new WaitForSeconds(temps_pause);
         pause_en_cours = false;
 
@@ -140,7 +142,7 @@ public class Balade : MonoBehaviour {
         {
             temps_ballade = Random.Range(min_temps_ballade, max_temps_ballade);
         }
-       
+       /*
         //MOUVEMENT/////////////////////////////////////////////////////////
         //SI c'est aléatoire
         if (balade_aleatoire == true)
@@ -154,9 +156,10 @@ public class Balade : MonoBehaviour {
 
             //On défini une taille aléatoire
             taille_balade = Random.Range(min_distance, max_distance);
-            //Position aléatoire
-            destination = new Vector3(Random.Range(-taille_balade, taille_balade) + this.gameObject.transform.position.x, Random.Range(-taille_balade, taille_balade) + this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-        } 
+
+			destination = new Vector3(Random.Range(-5.55f, 5.55f) + this.gameObject.transform.position.x, Random.Range(-2.52f, 2.52f) + this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+
+		} 
         if (balade_aleatoire == false)
         {
             float alea_x = Random.value;
@@ -177,21 +180,23 @@ public class Balade : MonoBehaviour {
             {
                 alea_y = -1;
             }
-
-            destination = new Vector3(taille_balade*alea_x + this.gameObject.transform.position.x, taille_balade*alea_y + this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+			destination = new Vector3(taille_balade * alea_x + this.gameObject.transform.position.x, taille_balade * alea_y + this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+			
+            if(destination.x > -5.55f && destination.x < 5.55f && destination.y > -2.52f && destination.x < 2.52f)
+			{
+				Debug.Log("a");
+			}
 
         }
-        
-        
+		*/
+		//préventions bords d'écran
+		destination = new Vector3(Random.Range(-5.55f, 5.55f), Random.Range(-2.52f, 2.52f) , this.gameObject.transform.position.z);
         distance = Vector3.Distance(transform.position, destination);
-
         ////////////////////////////////////////////////////////////////////
-
+		
+	
         
         balade_en_cours = true;
-
-        //Debug.Log(destination);
-
         yield return new WaitForSeconds(temps_ballade);
         balade_en_cours = false;
         StartCoroutine(pause_balade());
@@ -203,6 +208,8 @@ public class Balade : MonoBehaviour {
     {
         if (balade_en_cours == true)
         {
+			//préventions bords d'écran
+		
             deplacement();
             vecteur();
             acc_des();
@@ -216,9 +223,9 @@ public class Balade : MonoBehaviour {
             left = false;
             right = false;
 
-            velocity = new Vector3(0, 0, 0);
-            moveSpeed = 0;
-            move = false;
+			anim.SetBool("moving", false);
+			GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+			moveSpeed = 0;
             //anim.SetBool("moving", move);
         }
 
@@ -259,7 +266,7 @@ public class Balade : MonoBehaviour {
 
             }
 
-            if (transform.position.x > destination.x - 0.1f && transform.position.x < destination.x + 0.1f)
+            if (transform.position.x > destination.x - 0.2f && transform.position.x < destination.x + 0.2f)
             {
                 left = false; right = false;
             }
@@ -270,7 +277,7 @@ public class Balade : MonoBehaviour {
                 left = false; right = false;
             }
 
-            if (transform.position.y > destination.y - 0.1f && transform.position.y < destination.y + 0.1f)
+            if (transform.position.y > destination.y - 0.2f && transform.position.y < destination.y + 0.2f)
             {
                 up = false; down = false;
             }
@@ -332,17 +339,17 @@ public class Balade : MonoBehaviour {
     void acc_des()
     {
         //On ajoute une acceleration
-        if (up || down || left || right)
+        if ((up || down || left || right)&&distance>1)
         {
-            moveSpeed += acceleration;
+            moveSpeed += acceleration*Time.deltaTime;
             if (moveSpeed >= max_moveSpeed)
             {
                 moveSpeed = max_moveSpeed;
             }
         }
-        else //ou on descelere
+        if(distance<1) //ou on descelere
         {
-            moveSpeed -= desceleration;
+			moveSpeed -= desceleration * Time.deltaTime;
             if (moveSpeed <= 0)
             {
                 moveSpeed = 0;
@@ -374,27 +381,35 @@ public class Balade : MonoBehaviour {
             mirror = false;
         }
 
-        anim.SetBool("moving", move);
+        anim.SetBool("moving", true);
         anim.SetBool("mirror", mirror);
 
     }
 #endregion 
-
+	/*
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(balade_en_cours==true)
-        {
-            balade_en_cours = false;
-        }
+		
+		if(other.gameObject.tag=="mur")
+		{
+			Debug.Log("collision");
+			balade_en_cours = false;
+			StopCoroutine("balade");
+			StartCoroutine("pause_balade");
+		}
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (balade_en_cours == true)
-        {
-            balade_en_cours = false;
-        }
+		if (other.gameObject.tag == "mur")
+		{
+			Debug.Log("collision");
+			balade_en_cours = false;
+			StopCoroutine("balade");
+			StartCoroutine("pause_balade");
+		}
     }
-
+	*/
 
 }

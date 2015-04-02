@@ -59,7 +59,7 @@ public class CameraEventManager : MonoBehaviour
 
     void Start()
     {
-        QuestEventManager.onEvent += (EventManagerType emt) => { Debug.Log("&"); };
+		CameraEventManager.onEvent += (EventManagerType emt) => { Debug.Log("&"); };
     }
 
     public static void emit(EventManagerType emt)

@@ -32,6 +32,7 @@ public class RoomManager : MonoBehaviour {
     //Tableau des rooms à instancier
     public List<GameObject> set = new List<GameObject>();
     private List<int> memory = new List<int>();
+	public  List<GameObject> room_memory = new List<GameObject>();
 
     private bool m_NeedNewRoom;
 
@@ -46,34 +47,34 @@ public class RoomManager : MonoBehaviour {
         //On instancie la room
         room = Instantiate(set[room_actual]) as GameObject;
         room.transform.position = new Vector3(0, 0, 0);
-        room.SetActive(true);
         memory.Add(room_actual);
+		room_memory.Add(room);
+		room_memory[room_actual].SetActive(true);
     }
 
 
     public void ChangeRoom(int newRoom)
     {
-        room.SetActive(false);
+		m_NeedNewRoom = true;
+		
+		room_memory[room_actual].SetActive(false);
 
-        room_actual = newRoom;
-
-
-        for (int i = 0; i>memory.Count;i++)
+        for (int i = 0; i<memory.Count;i++)
         {
-            if(i==room_actual)
+			if (i == newRoom)
             {
-                room.SetActive(false);
-                room=set[room_actual];
-                room.SetActive(true);
-                m_NeedNewRoom = false;
-                return;
+				room_actual = i;
+				room_memory[i].SetActive(true);
+				m_NeedNewRoom = false;
             }
         }
+
         if(m_NeedNewRoom==true)
         {
-            room.SetActive(false);
+			room_actual = newRoom;
             AddNewRoom();
-            m_NeedNewRoom = false;
+            
+			
         }
         
 

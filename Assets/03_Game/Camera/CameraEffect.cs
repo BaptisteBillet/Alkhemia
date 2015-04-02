@@ -14,7 +14,7 @@ public class CameraEffect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        QuestEventManager.onEvent += Effect;
+		CameraEventManager.onEvent += Effect;
 
         fisheye = GetComponent<Fisheye>();
         shakemanager = GetComponent<ShakeManager>();
@@ -31,7 +31,7 @@ public class CameraEffect : MonoBehaviour
 
     void OnDestroy()
     {
-        QuestEventManager.onEvent -= Effect;
+		CameraEventManager.onEvent -= Effect;
     }
 
 

@@ -29,14 +29,16 @@ using System.Collections;
 public enum QuestEventManagerType
 {
 	START,
-	CHANGEPOISON,
-	CHANGEARAIGNEE
+	ADD_MUSH,
+	ADD_SPIDER,
+	SUBSTRACT_MUSH,
+	SUBSTRACT_SPIDER,
 }
 
 public class QuestEventManager : MonoBehaviour
 {
 
-	public delegate void EventAction(EventManagerType emt);
+	public delegate void EventAction(QuestEventManagerType emt);
 	public static event EventAction onEvent;
 
 	#region Singleton
@@ -60,10 +62,10 @@ public class QuestEventManager : MonoBehaviour
 
 	void Start()
 	{
-		QuestEventManager.onEvent += (EventManagerType emt) => { Debug.Log("&"); };
+		QuestEventManager.onEvent += (QuestEventManagerType emt) => { Debug.Log("&"); };
 	}
 
-	public static void quest_emit(EventManagerType emt)
+	public static void quest_emit(QuestEventManagerType emt)
 	{
 
 		if (onEvent != null)

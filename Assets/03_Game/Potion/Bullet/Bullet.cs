@@ -71,7 +71,6 @@ public class Bullet : MonoBehaviour {
             //Dégât VIVANT
             if ((other.gameObject.tag == "vivant") && this.gameObject.transform.parent.parent != other.gameObject && this.gameObject.transform.parent != other.gameObject) //Si l'on touche un vivant et que ce n'est pas notre parent
             {
-                Debug.Log("a");
                 vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
 
                 if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
