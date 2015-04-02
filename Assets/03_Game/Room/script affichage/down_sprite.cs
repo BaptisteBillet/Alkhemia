@@ -10,7 +10,7 @@ public class down_sprite : MonoBehaviour {
     public GameObject blocage;
 	void Start () 
     {
-        piece_down.gameObject.GetComponent<Room>();
+        //piece_down.gameObject.GetComponent<Room>();
 	}
 	
 	// Update is called once per frame

@@ -8,9 +8,13 @@ public class right_sprite : MonoBehaviour {
 
     public GameObject blocage;
 	// Use this for initialization
+
+    SpriteRenderer sprite;
+
 	void Start () 
     {
-        piece_right.gameObject.GetComponent<Room>();
+        sprite = GetComponent<SpriteRenderer>();
+        //piece_right.gameObject.GetComponent<Room>();
 	}
 	
 	// Update is called once per frame
@@ -21,11 +25,13 @@ public class right_sprite : MonoBehaviour {
         {
             open = false;
             blocage.SetActive(true);
+        
         }
         else
         {
             open = true;
             blocage.SetActive(false);
+
         }
         
 	}

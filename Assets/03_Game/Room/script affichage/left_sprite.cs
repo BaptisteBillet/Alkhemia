@@ -8,9 +8,13 @@ public class left_sprite : MonoBehaviour {
 	// Use this for initialization
 
     public GameObject blocage;
+
+    SpriteRenderer sprite;
 	void Start () 
     {
-        piece_left.gameObject.GetComponent<Room>();
+        //piece_left.gameObject.GetComponent<Room>();
+        sprite = GetComponent<SpriteRenderer>();
+        Debug.Log(piece_left);
 	}
 	
 	// Update is called once per frame
@@ -19,11 +23,14 @@ public class left_sprite : MonoBehaviour {
 
         if (piece_left.left_open == false)
         {
+            Debug.Log("a");
             open = false;
             blocage.SetActive(true);
+           
         }
         else
         {
+            Debug.Log("b");
             open = true;
             blocage.SetActive(false);
         }

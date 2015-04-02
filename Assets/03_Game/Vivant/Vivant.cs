@@ -68,6 +68,7 @@ public class Vivant : MonoBehaviour {
 
     public Animator anim;
 
+
     void OnEnable()
     {
         temps_invincible = 0.4f;
@@ -208,14 +209,14 @@ public class Vivant : MonoBehaviour {
 
         while (temps > 0)
         {
-
-            if (sprite.GetComponent<Renderer>().material.color == Color.white)
+            
+            if (sprite.material.color == Color.white)
             {
-                sprite.GetComponent<Renderer>().material.color = Color.red;
+                sprite.material.color = Color.red;
             }
             else
             {
-                sprite.GetComponent<Renderer>().material.color = Color.white;
+                sprite.material.color = Color.white;
             }
 
             yield return new WaitForSeconds(delay);
@@ -223,7 +224,7 @@ public class Vivant : MonoBehaviour {
             temps -= delay;
         }
 
-        sprite.GetComponent<Renderer>().material.color = Color.white;
+        sprite.material.color = Color.white;
         yield return null;
     }
 

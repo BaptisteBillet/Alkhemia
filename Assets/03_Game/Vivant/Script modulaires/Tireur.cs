@@ -27,6 +27,7 @@ public class Tireur : MonoBehaviour
         {
             //INSTANTIATION
             bullet = Instantiate(bullet_prefab, this.gameObject.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
+            bullet.transform.parent = this.gameObject.transform.parent.parent.parent;
 
             if (cible != null)
             {

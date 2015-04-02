@@ -11,8 +11,8 @@ public class up_sprite : MonoBehaviour {
     public GameObject blocage;
 	void Start () 
     {
-        piece_up.gameObject.GetComponent<Room>();
-	}
+        //piece_up.gameObject.GetComponent<Room>();
+    }
 	
 	// Update is called once per frame
 	void Update () 

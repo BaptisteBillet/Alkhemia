@@ -97,16 +97,16 @@ public class CameraEffect : MonoBehaviour
 
             while(intensity_value<2f)
             {
-                intensity_value += 0.1f;
+                intensity_value += 0.05f;
                 vignette.intensity=intensity_value;
-                yield return new WaitForSeconds(Random.Range(1,2));
+                yield return new WaitForSeconds(Random.Range(0.5f,1f));
             }
 
             while (intensity_value > 0.5f)
             {
-                intensity_value -= 0.1f;
+                intensity_value -= 0.05f;
                 vignette.intensity = intensity_value;
-                yield return new WaitForSeconds(Random.Range(1,2));
+                yield return new WaitForSeconds(Random.Range(0.5f,1f));
             }
 
         }

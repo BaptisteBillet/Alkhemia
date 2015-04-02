@@ -12,6 +12,8 @@ public class Inflammable : MonoBehaviour {
 
     public GameObject parent;
 
+    public Transform Parent;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -21,6 +23,31 @@ public class Inflammable : MonoBehaviour {
         }
 	}
     
+    void Cendre()
+    {
+        cendre = Instantiate(cendre_prefab) as GameObject; //Instantiation
+
+        Parent=this.transform.parent;
+
+        while(Parent.parent)
+        {
+            Parent = Parent.parent;
+        }
+
+        cendre.transform.position = this.gameObject.transform.position;
+        cendre.transform.parent = Parent;
+
+       
+        if(parent!=null)
+        {
+            Destroy(this.parent);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 	void Update()
     {
 
@@ -29,18 +56,8 @@ public class Inflammable : MonoBehaviour {
             
             if(main_script.life<=0)
             {
-                cendre = Instantiate(cendre_prefab) as GameObject; //Instantiation
-                cendre.transform.position = this.gameObject.transform.position;
-                cendre.transform.parent = this.gameObject.transform.parent.parent;
-                if(parent!=null)
-                {
-                    Destroy(parent);
-                }
-                else
-                {
-                    Destroy(this.gameObject);
-                }
-                
+
+                Cendre();
             }
 
         }

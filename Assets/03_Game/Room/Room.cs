@@ -12,13 +12,13 @@ public class Room : MonoBehaviour {
     public bool right_open;
     public bool down_open;
     public bool left_open;
-
+    
     public int up_id;
     public int right_id;
     public int down_id;
     public int left_id;
-
-
+    
+    
 
 
 }

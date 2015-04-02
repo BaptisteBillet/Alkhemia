@@ -6,8 +6,8 @@ public class Player : MonoBehaviour {
 
     //Références
         //Le donjon
-    public GameObject donjon;
-    private Donjon donjon_script;
+   // public GameObject donjon;
+    //private Donjon donjon_script;
         //Les objets en contact
     private Vivant vivant_script;
 
@@ -342,9 +342,11 @@ public class Player : MonoBehaviour {
 
             if (up_script.open == true)
             {
+                /*
                 donjon_script.sortie_prise = "up";
-                direction="down";
+                direction="down";*/
                 transform.position = spawn_down.transform.position;
+                //RoomManager.instance.ChangeRoom();
             }
         }
         if (other.gameObject.tag == "exit_right")
@@ -352,9 +354,11 @@ public class Player : MonoBehaviour {
             right_script = (right_sprite)other.gameObject.GetComponent(typeof(right_sprite));
             if (right_script.open == true)
             {
+                /*
                 donjon_script.sortie_prise = "right";
-                direction="left";
+                direction="left";*/
                 transform.position = spawn_left.transform.position;
+                //RoomManager.instance.ChangeRoom();
             }
         }
         if (other.gameObject.tag == "exit_down")
@@ -363,10 +367,12 @@ public class Player : MonoBehaviour {
             
             if (down_script.open == true)
             {
+                /*
                 donjon_script.sortie_prise = "down";
-                direction="up";
+                direction="up";*/
 
                 transform.position = spawn_up.transform.position;
+                //RoomManager.instance.ChangeRoom();
             }
         }
         if (other.gameObject.tag == "exit_left")
@@ -375,9 +381,11 @@ public class Player : MonoBehaviour {
 
             if (left_script.open == true)
             {
+                /*
                 donjon_script.sortie_prise = "left";
-                direction="right";
+                direction="right";*/
                 transform.position = spawn_right.transform.position;
+                //RoomManager.instance.ChangeRoom();
             }
         }
         
