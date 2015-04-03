@@ -123,7 +123,7 @@ public class Balade : MonoBehaviour {
         }
 
         pause_en_cours = true;
-
+        if(anim!=null)
 		anim.SetBool("moving", false);
 		GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         yield return new WaitForSeconds(temps_pause);
@@ -222,7 +222,7 @@ public class Balade : MonoBehaviour {
             down = false;
             left = false;
             right = false;
-
+            if (anim != null)
 			anim.SetBool("moving", false);
 			GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
 			moveSpeed = 0;
@@ -380,9 +380,12 @@ public class Balade : MonoBehaviour {
         {
             mirror = false;
         }
-
-        anim.SetBool("moving", true);
-        anim.SetBool("mirror", mirror);
+        if (anim != null)
+        {
+            anim.SetBool("moving", true);
+            anim.SetBool("mirror", mirror);
+        }
+        
 
     }
 #endregion 
