@@ -23,22 +23,25 @@ public class BulletTarentule : MonoBehaviour {
     public GameObject source_degat;
 
     public GameObject fongus;
+
+	public GameObject toile;
+
     void Start()
     {
         if (duree_mort == true)
         {
-            if (fongus != null)
-            {
-                Destroy(fongus, duree_temps);
-            }
-            else
-            {
-                Destroy(this.gameObject, duree_temps);
-            }
-
+			StartCoroutine(Destroy());
         }
 
     }
+
+
+	IEnumerator Destroy ()
+	{
+		yield return new WaitForSeconds(duree_temps);
+		Instantiate(toile, this.transform.position, toile.transform.rotation);
+		Destroy(this.gameObject);
+	}
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -64,6 +67,8 @@ public class BulletTarentule : MonoBehaviour {
                         Destroy(this.gameObject);
                     }
                 }
+
+				Instantiate(toile, player_script.transform.position, toile.transform.rotation);
 
             }
 

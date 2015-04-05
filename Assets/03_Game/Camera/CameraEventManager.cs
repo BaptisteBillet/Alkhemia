@@ -29,7 +29,8 @@ using System.Collections;
 public enum EventManagerType
 {
     FISHEYEBUMP,
-    SHAKE
+    SHAKE,
+	START_CINE
 }
 
 public class CameraEventManager : MonoBehaviour

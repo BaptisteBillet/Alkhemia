@@ -9,11 +9,21 @@ public class CameraEffect : MonoBehaviour
     private ShakeManager shakemanager;
     private VignetteAndChromaticAberration vignette;
     public bool VignetteEffect;
+
+	[HideInInspector]
+	public GameObject m_Player;
+
+	public GameObject Apparition;
+
     #endregion
+
 
     // Use this for initialization
     void Start()
     {
+		m_Player = GameObject.FindGameObjectWithTag("Player");
+		
+
 		CameraEventManager.onEvent += Effect;
 
         fisheye = GetComponent<Fisheye>();
@@ -25,7 +35,7 @@ public class CameraEffect : MonoBehaviour
         fisheye.strengthY = 0;
 
         VignetteEffect = true;
-        StartCoroutine(Vignette_Effect());
+        
 
     }
 
@@ -52,11 +62,45 @@ public class CameraEffect : MonoBehaviour
                 shakemanager.LetsShake(false);
                 break;
             
+			case EventManagerType.START_CINE:
+				StartCoroutine(start_coroutine());
+				break;
+
         }
 
     }
 
-    IEnumerator fisheyemanager()
+
+	#region Start
+	IEnumerator start_coroutine()
+	{
+		//On lance le vignetage traditionnel
+		StartCoroutine(start_vignetage());
+		yield return null;
+	}
+
+	IEnumerator start_vignetage()
+	{	
+		m_Player.SetActive(false);
+		vignette.intensity = 33;
+		yield return new WaitForSeconds(2);
+		Instantiate(Apparition, Vector3.zero, this.transform.rotation);
+		yield return new WaitForSeconds(0.9f);
+		m_Player.SetActive(true);
+
+		while(vignette.intensity>1)
+		{
+			vignette.intensity -= 0.1f;
+			yield return new WaitForSeconds(0.0000000001f);
+		}
+		vignette.intensity = 1;
+	}
+
+
+	#endregion
+
+
+	IEnumerator fisheyemanager()
     {
 
         fisheye.enabled = true;

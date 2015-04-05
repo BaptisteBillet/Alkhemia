@@ -10,6 +10,11 @@ public class Detection : MonoBehaviour
     private GameObject nouvelle_cible;
     private string last_statut;
 
+	public bool AugmenteRadius;
+	public float NewRadius;
+	private float OldRadius;
+
+
 	public TarentuletteBlock Block;
     //categorie recherché
     [System.Serializable]
@@ -38,6 +43,10 @@ public class Detection : MonoBehaviour
     private float test;
     private float test_cible;
 
+	void Start()
+	{
+		OldRadius = GetComponent<CircleCollider2D>().radius;
+	}
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -107,6 +116,11 @@ public class Detection : MonoBehaviour
         if (!cible_probable.Contains(cible))                     //Si la cible actuel n'est plus dans la liste, ce n'est plus la cible
         {
             cible = null;
+			if(AugmenteRadius==true)
+			{
+				GetComponent<CircleCollider2D>().radius = OldRadius;
+			}
+			
             prioritaire();
         }
 
@@ -135,6 +149,10 @@ public class Detection : MonoBehaviour
                 if (cible_probable[i].tag == "Player")     //Si la cible en cours et Player elle passe prioritaire
                 {
                     cible = cible_probable[i];
+					if(AugmenteRadius)
+					{
+						GetComponent<CircleCollider2D>().radius = NewRadius;
+					}
                     player_script = (Player)cible.GetComponent(typeof(Player));
                     last_statut = player_script.statut;
 					//Sommeil

@@ -46,8 +46,11 @@ public class Destination : MonoBehaviour {
        
         destination = cible.position;
 
+		
+
         if (Vector3.Distance(this.transform.position, destination) > distance)
         {
+			Debug.Log(Vector3.Distance(this.transform.position, destination) > distance);
             deplacement();
             vecteur();
             acc_des();

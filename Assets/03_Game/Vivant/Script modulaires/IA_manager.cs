@@ -26,7 +26,7 @@ public class IA_manager : MonoBehaviour {
 
         //Etape 4 Autres spécificités
     private CAC CAC_script;
-    private Tireur Tireur_script;
+    public Tireur Tireur_script;
 
 
 
@@ -118,7 +118,7 @@ public class IA_manager : MonoBehaviour {
             if (Patrouille_script != null)
             {
                 
-                IA_Patrouille = true;
+               IA_Patrouille = true;
             }
 
             Fuis_script = (Fuis)objet_deplacement.GetComponent(typeof(Fuis));
@@ -128,6 +128,7 @@ public class IA_manager : MonoBehaviour {
 
                 IA_Fuis = true;
             }
+			
 
         }
 
@@ -145,14 +146,11 @@ public class IA_manager : MonoBehaviour {
             IA_CAC = true;
         }
 
-        //Tireur
-        Tireur_script = (Tireur)this.gameObject.GetComponent(typeof(Tireur));
-        if (Tireur_script != null)
-        {
-
-            IA_Tireur = true;
-            Tireur_script.enabled = false;
-        }
+		//TIREUR
+		if (Tireur_script != null)
+		{
+			IA_Tireur = true;
+		}
 
         //On indique le module de déplacement de base
         modules_deplacements(module_deplacement);
@@ -303,6 +301,7 @@ public class IA_manager : MonoBehaviour {
                        modules_deplacements("destination");
                    }
                }
+
                if(IA_Tireur==true)
                {
                    if (Destination_script == true)
@@ -311,7 +310,6 @@ public class IA_manager : MonoBehaviour {
                    }
 
                    Tireur_script.enabled = true;
-                   Tireur_script.cible = Detection_script.cible.transform;
                    
                }
            }

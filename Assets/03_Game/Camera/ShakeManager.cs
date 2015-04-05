@@ -171,7 +171,7 @@ public class ShakeManager : MonoBehaviour {
     void StopShaking()
     {
         CancelInvoke("CameraShake");
-        //mainCamera.transform.position = originalCameraPosition;
+		mainCamera.transform.position = new Vector3(0, 0, -10);
     }
 
 }

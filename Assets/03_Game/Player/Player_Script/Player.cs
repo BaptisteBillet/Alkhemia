@@ -93,6 +93,8 @@ public class Player : MonoBehaviour {
     //Renouveau du poison, feu...
     private float delay;
 
+	//Renouveau de la toile
+
     //Deplacement changement de pièces
     private float smooth=5f;
     private float destination;
@@ -213,6 +215,10 @@ public class Player : MonoBehaviour {
         return 1;
     }
 
+	public void SlowWeb()
+	{
+
+	}
 
     public void dps_process(float degat_dps, float duree_dps, float intervalle_dps, string statut_impact, float temps_impact)
     {

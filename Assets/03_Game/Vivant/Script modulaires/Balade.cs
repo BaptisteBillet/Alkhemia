@@ -120,11 +120,15 @@ public class Balade : MonoBehaviour {
         if (temps_pause_aleatoire == true) //Si le temps est aléatoire
         {
             temps_pause = Random.Range(min_temps_pause, max_temps_pause);
+
         }
 
         pause_en_cours = true;
-
-		anim.SetBool("moving", false);
+		if(anim!=null)
+		{
+			anim.SetBool("moving", false);
+		}
+		
 		GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         yield return new WaitForSeconds(temps_pause);
         pause_en_cours = false;
@@ -209,31 +213,26 @@ public class Balade : MonoBehaviour {
         if (balade_en_cours == true)
         {
 			//préventions bords d'écran
-		
             deplacement();
             vecteur();
             acc_des();
             animation();
         }
 
-        if(balade_en_cours==false && Papillon==false)
+        if(balade_en_cours==false)
         {
             up = false;
             down = false;
             left = false;
             right = false;
 
-			anim.SetBool("moving", false);
+			if(anim!=null)
+			{
+				anim.SetBool("moving", false);
+			}
+			
 			GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
 			moveSpeed = 0;
-            //anim.SetBool("moving", move);
-        }
-
-        if(balade_en_cours==false && Papillon==true)
-        {
-            vecteur();
-            acc_des();
-            animation();
         }
 
     }
@@ -242,50 +241,62 @@ public class Balade : MonoBehaviour {
 
     void deplacement()
     {
+		if (destination.x == transform.position.x)
+		{
+			left = false; right = false;
+		}
+		else
+		{
+			if (transform.position.x > destination.x - 0.2f && transform.position.x < destination.x + 0.2f)
+			{
+				left = false; right = false;
+			}
+			else
+			{
+				if (destination.x > transform.position.x)
+				{
+					left = false;
+					right = true;
+				}
+				if (destination.x < transform.position.x)
+				{
+					right = false;
+					left = true;
+				}
+			}
 
-            if (destination.x > transform.position.x)
-            {
-                left = false;
-                right = true;
-            }
-            if (destination.x < transform.position.x)
-            {
-                right = false;
-                left = true;
-            }
-            if (destination.y < transform.position.y)
-            {
-                up = false;
-                down = true;
-
-            }
-            if (destination.y > transform.position.y)
-            {
-                down = false;
-                up = true;
-
-            }
-
-            if (transform.position.x > destination.x - 0.2f && transform.position.x < destination.x + 0.2f)
-            {
-                left = false; right = false;
-            }
+			
+		
+		}
 
 
-            if (destination.x == transform.position.x)
-            {
-                left = false; right = false;
-            }
+        if (destination.y == transform.position.y) 
+        {
+            up = false; down = false;
 
-            if (transform.position.y > destination.y - 0.2f && transform.position.y < destination.y + 0.2f)
-            {
-                up = false; down = false;
-            }
+        }
+		else
+		{
+			if (transform.position.y > destination.y - 0.2f && transform.position.y < destination.y + 0.2f)
+			{
+				up = false; down = false;
+			}
+			else
+			{
+				if (destination.y < transform.position.y)
+				{
+					up = false;
+					down = true;
 
-            if (destination.y == transform.position.y) 
-            {
-                up = false; down = false;
-            }
+				}
+				if (destination.y > transform.position.y)
+				{
+					down = false;
+					up = true;
+
+				}
+			}
+		}
             
     }
     void vecteur()
@@ -356,6 +367,11 @@ public class Balade : MonoBehaviour {
             }
         }
 
+		if (distance < 0.5f) //ou on descelere
+		{
+			moveSpeed = 0;
+		}
+
         //Déplacements
         GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
         
@@ -381,9 +397,21 @@ public class Balade : MonoBehaviour {
             mirror = false;
         }
 
-        anim.SetBool("moving", true);
-        anim.SetBool("mirror", mirror);
+		if(moveSpeed>0)
+		{
+			move = true;
+		}
+		else
+		{
+			move = false;
+		}
 
+		if (anim != null)
+		{
+			anim.SetBool("moving", move);
+			anim.SetBool("mirror", mirror);
+		}
+ 
     }
 #endregion 
 	/*
