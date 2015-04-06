@@ -30,7 +30,7 @@ public class Tireur : MonoBehaviour
 		bullet.transform.parent = this.gameObject.transform.parent.parent.parent;
 
 
-		dir = new Vector3(m_Player.transform.position.x - this.gameObject.transform.parent.transform.position.x, m_Player.transform.position.y - 1 - this.gameObject.transform.parent.transform.position.y, m_Player.transform.position.z);
+		dir = new Vector3(m_Player.transform.position.x - this.gameObject.transform.parent.transform.position.x, m_Player.transform.position.y - 1 - this.gameObject.transform.parent.transform.position.y, m_Player.transform.position.z).normalized;
 		//dir = cible.transform.position.normalized;
 
 		//ENVOI dans une direction

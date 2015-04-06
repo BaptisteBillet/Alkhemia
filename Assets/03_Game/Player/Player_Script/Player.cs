@@ -107,6 +107,11 @@ public class Player : MonoBehaviour {
 
 	private Rigidbody2D rigidbody;
 
+	//KNOCKBACK
+	private Vector3 knockback_direction;
+	private float knockback_force;
+	
+
     ///////////////////////////////////////////////////////
 	void Awake ()
     {
@@ -270,7 +275,8 @@ public class Player : MonoBehaviour {
     public IEnumerator impact(Transform position_agresseur,float degat_impact, string statut_impact, float temps_impact)
     {
 		Vector3 dir= (this.transform.position-position_agresseur.position).normalized;
-       
+		knockback_direction = dir;
+
 
         //Si on est pas insensibilisé
         if (statut != statut_impact || statut_impact=="normal")
@@ -784,7 +790,20 @@ public class Player : MonoBehaviour {
                 moveSpeed = 0;
             }
         }
+		//Déplacements
+		GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed +knockback_direction*knockback_force;
+		
+		if(knockback_force>0)
+		{
+			knockback_force -= Time.deltaTime*5;
+		}
+		else
+		{
+			knockback_force = 0;
+		}
+
     }
+
 
     void animation()
     {
