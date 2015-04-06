@@ -301,22 +301,22 @@ public class Balade : MonoBehaviour {
         //Diagonals
         if (up && left)
         {
-            velocity = new Vector3(-1, 1, 0);
+			velocity = new Vector3(-1, 1, 0).normalized;
             if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 45); }
         }
         if (up && right)
         {
-            velocity = new Vector3(1, 1, 0);
+			velocity = new Vector3(1, 1, 0).normalized;
             if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 315); }
         }
         if (down && left)
         {
-            velocity = new Vector3(-1, -1, 0);
+			velocity = new Vector3(-1, -1, 0).normalized;
             if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 135); }
         }
         if (down && right)
         {
-            velocity = new Vector3(1, -1, 0);
+			velocity = new Vector3(1, -1, 0).normalized;
             if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 225); }
         }
 

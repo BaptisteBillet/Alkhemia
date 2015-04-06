@@ -13,15 +13,20 @@ public class Plante_gaz : Vivant {
     public GameObject explosion_prefab;
     private GameObject explosion;
 
+	public GameObject cendre_prefab;
+	private GameObject cendre;
 
+	private bool mort;
 	// Use this for initialization
 	void Start () 
     {
+
+		anim.SetBool("recolte", false);
         //Initialisation
         name = "Plante_gaz";
         statut = "toxic";
         immortel = false;
-
+		mort=false;
         
         StartCoroutine(fongus());
         
@@ -32,11 +37,13 @@ public class Plante_gaz : Vivant {
     {
         while(life>0)
         {
+			anim.ResetTrigger("produit");
+			anim.SetTrigger("produit");
             //création du nuage
             toxic_nuage = Instantiate(toxic_nuage_prefab) as GameObject; //Instantiation
 
 			toxic_nuage.transform.position = this.transform.parent.position;
-			//toxic_nuage.transform.parent = transform;
+			toxic_nuage.transform.parent = this.transform.parent.parent;
             //toxic_nuage.transform.localPosition = new Vector3(-1,2.2f,0);
             /*
             toxic_nuage_script = (Bullet)toxic_nuage.GetComponent(typeof(Bullet));
@@ -55,14 +62,32 @@ public class Plante_gaz : Vivant {
   
     void Update()
     {
-        if(life<=0)
+        if(life<=0 && mort==false)
         {
-            Destroy(this.gameObject);
+			mort = true;
+			producteur = false;
+			producteur_ok = false;
+			anim.SetTrigger("explosion");
             explosion_prefab.transform.position = this.gameObject.transform.position;
 
             explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation
             explosion.transform.position = this.gameObject.transform.position;
         }
+
+		if(producteur_ok==false)
+		{
+			anim.SetBool("recolte", true);
+		}
+
     }
+
+	public void Cendre()
+	{
+		if (statut_temporaire == "feu")
+		{
+				cendre = Instantiate(cendre_prefab,this.transform.position,cendre_prefab.transform.rotation ) as GameObject; //Instantiation
+		}
+		
+	}
 
 }

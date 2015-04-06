@@ -66,8 +66,7 @@ public class Vivant : MonoBehaviour {
 
     public GameObject parent;
 
-    public Animator anim;
-
+	public Animator anim;
 
     void OnEnable()
     {
@@ -201,32 +200,56 @@ public class Vivant : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator clignote()
-    {
-        float temps = temps_invincible;
+	IEnumerator clignote(int time=-1)
+	{
+		float temps;
+		if(time==-1)
+		{
+			temps = temps_invincible;
+		}
+		else
+		{
+			temps=time;
+		}
 
-        float delay = 0.15f;
+		float delay = 0.15f;
 
-        while (temps > 0)
-        {
-            
-            if (sprite.material.color == Color.white)
-            {
-                sprite.material.color = Color.red;
-            }
-            else
-            {
-                sprite.material.color = Color.white;
-            }
+		while (temps > 0)
+		{
 
-            yield return new WaitForSeconds(delay);
+			if (sprite.GetComponent<Renderer>().material.color == Color.white)
+			{
 
-            temps -= delay;
-        }
+				switch (statut_temporaire)
+				{
+					case "normal":
+						sprite.GetComponent<Renderer>().material.color = Color.red;
+						break;
+					case "toxic":
+						sprite.GetComponent<Renderer>().material.color = Color.green;
+						break;
+					case "feu":
+						sprite.GetComponent<Renderer>().material.color = Color.red;
+						break;
+					default:
+						sprite.GetComponent<Renderer>().material.color = Color.red;
+						break;
+				}
 
-        sprite.material.color = Color.white;
-        yield return null;
-    }
+			}
+			else
+			{
+				sprite.GetComponent<Renderer>().material.color = Color.white;
+			}
+
+			yield return new WaitForSeconds(delay);
+
+			temps -= delay;
+		}
+
+		sprite.GetComponent<Renderer>().material.color = Color.white;
+		yield return null;
+	}
 
 
     #endregion

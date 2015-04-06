@@ -30,9 +30,11 @@ public enum QuestEventManagerType
 {
 	START,
 	ADD_MUSH,
-	ADD_SPIDER,
+	ADD_VENON,
+	ADD_GOLDEN,
 	SUBSTRACT_MUSH,
-	SUBSTRACT_SPIDER,
+	SUBSTRACT_VENON,
+	SUBSTRACT_GOLDEN
 }
 
 public class QuestEventManager : MonoBehaviour

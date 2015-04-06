@@ -16,38 +16,26 @@ public class Tireur : MonoBehaviour
 
 	private GameObject m_Player;
 
-
+	public Animator anim;
 
     void OnEnable()
     {
-
 		m_Player = GameObject.FindGameObjectWithTag("Player");
-
-		StartCoroutine(tir());
-
     }
 
-    IEnumerator tir()
-    {
-        while(this.enabled)
-        {
-            //INSTANTIATION
-            bullet = Instantiate(bullet_prefab, this.gameObject.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
-            bullet.transform.parent = this.gameObject.transform.parent.parent.parent;
+	public void Tir()
+	{
+		//INSTANTIATION
+		bullet = Instantiate(bullet_prefab, this.gameObject.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
+		bullet.transform.parent = this.gameObject.transform.parent.parent.parent;
 
-        
-			dir = new Vector3(m_Player.transform.position.x - this.gameObject.transform.parent.transform.position.x, m_Player.transform.position.y-1 - this.gameObject.transform.parent.transform.position.y, m_Player.transform.position.z);
-                //dir = cible.transform.position.normalized;
-            
-            //ENVOI dans une direction
-            bullet.GetComponent<Rigidbody2D>().AddForce(dir *vitesse*0.001f);
-            
-            yield return new WaitForSeconds(frequence); 
-            
-        }
 
-        yield return null;
-    }
+		dir = new Vector3(m_Player.transform.position.x - this.gameObject.transform.parent.transform.position.x, m_Player.transform.position.y - 1 - this.gameObject.transform.parent.transform.position.y, m_Player.transform.position.z);
+		//dir = cible.transform.position.normalized;
+
+		//ENVOI dans une direction
+		bullet.GetComponent<Rigidbody2D>().AddForce(dir * vitesse * 0.001f);
+	}
 
 
 

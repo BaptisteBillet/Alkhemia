@@ -27,13 +27,20 @@ public class Inflammable : MonoBehaviour {
     {
         cendre = Instantiate(cendre_prefab) as GameObject; //Instantiation
 
-        Parent=this.transform.parent;
+		Parent = this.transform;
 
-        while(Parent.parent)
-        {
-            Parent = Parent.parent;
-        }
+		if(this.transform.parent)
+		{
+			Parent = this.transform.parent;
 
+			while (Parent.parent)
+			{
+				Parent = Parent.parent;
+			}
+
+		}
+
+      
         cendre.transform.position = this.gameObject.transform.position;
         cendre.transform.parent = Parent;
 

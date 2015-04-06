@@ -317,7 +317,15 @@ public class Player : MonoBehaviour {
 
             if (sprite.GetComponent<Renderer>().material.color == Color.white)
             {
-                sprite.GetComponent<Renderer>().material.color = Color.red;
+				if(statut_temporaire=="normal")
+				{
+					sprite.GetComponent<Renderer>().material.color = Color.red;
+				}
+				if (statut_temporaire == "toxic")
+				{
+					sprite.GetComponent<Renderer>().material.color = Color.green;
+				}
+               
             }
             else
             {
@@ -720,19 +728,19 @@ public class Player : MonoBehaviour {
         //Diagonals
         if (up && left)
         {
-            velocity = new Vector3(-1, 1, 0);
+            velocity = new Vector3(-1, 1, 0).normalized;
         }
         if (up && right)
         {
-            velocity = new Vector3(1, 1, 0);
+			velocity = new Vector3(1, 1, 0).normalized;
         }
         if (down && left)
         {
-            velocity = new Vector3(-1, -1, 0);
+			velocity = new Vector3(-1, -1, 0).normalized;
         }
         if (down && right)
         {
-            velocity = new Vector3(1, -1, 0);
+			velocity = new Vector3(1, -1, 0).normalized;
         }
 
 

@@ -8,6 +8,7 @@ public class Destination : MonoBehaviour {
     private Vector3 destination;
 
     public float distance;
+	public float delta;
 
     //BOOL KEYBOARD/////////////////
 
@@ -32,6 +33,10 @@ public class Destination : MonoBehaviour {
     //Animation
     public Animator anim;
 
+	private bool rotate = false;
+
+	public GameObject tireur_script;
+
     void OnEnable()
     {
         up = false;
@@ -39,164 +44,262 @@ public class Destination : MonoBehaviour {
         left = false;
         right = false;
 
-           }
+     }
 
     void Update()
     {
        
         destination = cible.position;
 
+		if (tireur_script != null)
+		{
+			if (Vector3.Distance(this.transform.position, destination) > distance && Vector3.Distance(this.transform.position, destination) > delta)
+			{
+			    tireur_script.SetActive(false);
+
+
+				deplacement();
+				vecteur();
+				acc_des();
+				animation();
+			}
+			else
+			{
+
+				tireur_script.SetActive(true);
+
+				up = false;
+				down = false;
+				right = false;
+				left = false;
+
+				velocity = Vector3.zero;
+
+				moveSpeed = 0;
+				GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+				move = false;
+				anim.SetBool("moving", move);
+			}
+		}
+		else
+		{
+			if (Vector3.Distance(this.transform.position, destination) > distance)
+			{
+				deplacement();
+				vecteur();
+				acc_des();
+				animation();
+			}
+			else
+			{
+				up = false;
+				down = false;
+				right = false;
+				left = false;
+
+				velocity = Vector3.zero;
+
+				moveSpeed = 0;
+				GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+				move = false;
+				anim.SetBool("moving", move);
+			}
+		}
+
+
+
+    }
+
+
+	#region deplacement
+
+	void deplacement()
+	{
+		if (destination.x == transform.position.x)
+		{
+			left = false; right = false;
+		}
+		else
+		{
+			if (transform.position.x > destination.x - 0.2f && transform.position.x < destination.x + 0.2f)
+			{
+				left = false; right = false;
+			}
+			else
+			{
+				if (destination.x > transform.position.x)
+				{
+					left = false;
+					right = true;
+				}
+				if (destination.x < transform.position.x)
+				{
+					right = false;
+					left = true;
+				}
+			}
+
+
+
+		}
+
+
+		if (destination.y == transform.position.y)
+		{
+			up = false; down = false;
+
+		}
+		else
+		{
+			if (transform.position.y > destination.y - 0.2f && transform.position.y < destination.y + 0.2f)
+			{
+				up = false; down = false;
+			}
+			else
+			{
+				if (destination.y < transform.position.y)
+				{
+					up = false;
+					down = true;
+
+				}
+				if (destination.y > transform.position.y)
+				{
+					down = false;
+					up = true;
+
+				}
+			}
+		}
+
+	}
+	void vecteur()
+	{
+		//Diagonals
+		if (up && left)
+		{
+			velocity = new Vector3(-1, 1, 0).normalized;
+			if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 45); }
+		}
+		if (up && right)
+		{
+			velocity = new Vector3(1, 1, 0).normalized;
+			if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 315); }
+		}
+		if (down && left)
+		{
+			velocity = new Vector3(-1, -1, 0).normalized;
+			if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 135); }
+		}
+		if (down && right)
+		{
+			velocity = new Vector3(1, -1, 0).normalized;
+			if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 225); }
+		}
+
+
+		//Simple direction
+		if (up == true && !left && !right)
+		{
+			velocity = new Vector3(0, 1, 0);
+
+		}
+		if (down == true && !left && !right)
+		{
+			velocity = new Vector3(0, -1, 0);
+		}
+		if (left == true && !up && !down)
+		{
+			velocity = new Vector3(-1, 0, 0);
+			if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90); }
+
+		}
+		if (right == true && !up && !down)
+		{
+			velocity = new Vector3(1, 0, 0);
+			if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270); }
+		}
+
+	}
+	void acc_des()
+	{
+		if (tireur_script != null)
+		{
+		//On ajoute une acceleration
+		if ((up || down || left || right) && distance > 1)
+		{
+			moveSpeed += acceleration * Time.deltaTime;
+			if (moveSpeed >= max_moveSpeed)
+			{
+				moveSpeed = max_moveSpeed;
+			}
+		}
+
 		
+			if (distance < 1) //ou on descelere
+			{
+				moveSpeed -= desceleration * Time.deltaTime;
+				if (moveSpeed <= 0)
+				{
+					moveSpeed = 0;
+				}
+			}
 
-        if (Vector3.Distance(this.transform.position, destination) > distance)
-        {
-			Debug.Log(Vector3.Distance(this.transform.position, destination) > distance);
-            deplacement();
-            vecteur();
-            acc_des();
-            animation();
-        }
-    }
+			if (distance < 0.5f) //ou on descelere
+			{
+				moveSpeed = 0;
+			}
+		}
+		else
+		{
+			if ((up || down || left || right))
+			{
+				moveSpeed += acceleration * Time.deltaTime;
+				if (moveSpeed >= max_moveSpeed)
+				{
+					moveSpeed = max_moveSpeed;
+				}
+			}
+		}
 
+		//Déplacements
+		GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
 
-    #region deplacement
+	}
 
-    void deplacement()
-    {
+	void animation()
+	{
+		if (up || down || left || right)
+		{
+			move = true;
+		}
+		if (up == false && down == false && left == false && right == false)
+		{
+			move = false;
+		}
 
-        if (destination.x > transform.position.x)
-        {
-            left = false;
-            right = true;
-        }
-        if (destination.x < transform.position.x)
-        {
-            right = false;
-            left = true;
-        }
-        if (destination.y < transform.position.y)
-        {
-            up = false;
-            down = true;
+		if (right == true)
+		{
+			mirror = true;
+		}
+		if (left == true)
+		{
+			mirror = false;
+		}
 
-        }
-        if (destination.y > transform.position.y)
-        {
-            down = false;
-            up = true;
-
-        }
-
-        if (transform.position.x > destination.x - 0.1f && transform.position.x < destination.x + 0.1f)
-        {
-            left = false; right = false;
-        }
-
-
-        if (destination.x == transform.position.x)
-        {
-            left = false; right = false;
-        }
-
-        if (transform.position.y > destination.y - 0.1f && transform.position.y < destination.y + 0.1f)
-        {
-            up = false; down = false;
-        }
-
-        if (destination.y == transform.position.y)
-        {
-            up = false; down = false;
-        }
-
-    }
-    void vecteur()
-    {
-        //Diagonals
-        if (up && left)
-        {
-            velocity = new Vector3(-1, 1, 0);
-        }
-        if (up && right)
-        {
-            velocity = new Vector3(1, 1, 0);
-        }
-        if (down && left)
-        {
-            velocity = new Vector3(-1, -1, 0);
-        }
-        if (down && right)
-        {
-            velocity = new Vector3(1, -1, 0);
-        }
+		if (anim != null)
+		{
+			anim.SetBool("moving", true);
+			anim.SetBool("mirror", mirror);
+		}
 
 
-        //Simple direction
-        if (up == true && !left && !right)
-        {
-            velocity = new Vector3(0, 1, 0);
-        }
-        if (down == true && !left && !right)
-        {
-            velocity = new Vector3(0, -1, 0);
-        }
-        if (left == true && !up && !down)
-        {
-            velocity = new Vector3(-1, 0, 0);
-        }
-        if (right == true && !up && !down)
-        {
-            velocity = new Vector3(1, 0, 0);
-        }
+		if (anim != null)
+		{
+			anim.SetBool("moving", move);
+			anim.SetBool("mirror", mirror);
+		}
 
-    }
-    void acc_des()
-    {
-        //On ajoute une acceleration
-        if (up || down || left || right)
-        {
-            moveSpeed += acceleration;
-            if (moveSpeed >= max_moveSpeed)
-            {
-                moveSpeed = max_moveSpeed;
-            }
-        }
-        else //ou on descelere
-        {
-            moveSpeed -= desceleration;
-            if (moveSpeed <= 0)
-            {
-                moveSpeed = 0;
-            }
-        }
-
-        //Déplacements
-        GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
-
-    }
-
-    void animation()
-    {
-        if (up || down || left || right)
-        {
-            move = true;
-        }
-        if (up == false && down == false && left == false && right == false)
-        {
-            move = false;
-        }
-
-        if (right == true)
-        {
-            mirror = true;
-        }
-        if (left == true)
-        {
-            mirror = false;
-        }
-
-        anim.SetBool("moving", move);
-        anim.SetBool("mirror", mirror);
-
-    }
-    #endregion 
+	}
+	#endregion 
 }

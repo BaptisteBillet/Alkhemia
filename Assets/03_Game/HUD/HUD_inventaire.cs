@@ -12,7 +12,8 @@ public class HUD_inventaire : MonoBehaviour {
     public GameObject I_cendre;
     public GameObject I_essence;
     public GameObject I_pommedepin;
-    public GameObject I_champignon;
+	public GameObject I_champignon;
+	public GameObject I_venin;
 
     public GameObject player;
     private Player player_script;
@@ -51,7 +52,6 @@ public class HUD_inventaire : MonoBehaviour {
 
                     if (place[i].transform.childCount == 0)
                     {
-						
                         if (ingredient_script.name == "I_Fraise")
                         {
                             ingredient = Instantiate(I_fraise) as GameObject;
@@ -118,8 +118,21 @@ public class HUD_inventaire : MonoBehaviour {
                             ingredient.transform.localPosition = new Vector3(0, 0, 0);
                             ingredient.transform.localScale = new Vector3(1f, 1f, 1);
                             ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-
+							QuestEventManager.quest_emit(QuestEventManagerType.ADD_MUSH);
                         }
+
+
+						if (ingredient_script.name == "I_venin")
+						{
+							ingredient = Instantiate(I_venin) as GameObject;
+							ingredient.transform.parent = place[i].transform;
+							ingredient.transform.localPosition = new Vector3(0, 0, 0);
+							ingredient.transform.localScale = new Vector3(1f, 1f, 1);
+							ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+							QuestEventManager.quest_emit(QuestEventManagerType.ADD_VENON);
+
+						}
+
                     }
                 }
             }
