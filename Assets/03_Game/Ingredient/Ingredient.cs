@@ -41,7 +41,7 @@ public class Ingredient : MonoBehaviour
                 {
                     if (Autel.instance.ReadyForChange)
                     {
-                        Autel.instance.autel_activation(Origin);
+                        //Autel.instance.autel_activation(Origin);
                     }
                 }
 
@@ -49,7 +49,7 @@ public class Ingredient : MonoBehaviour
                 {
                     if (Marchand.instance.ReadyForChange)
                     {
-                        Marchand.instance.autel_activation(Origin);
+                        //Marchand.instance.autel_activation(Origin);
                     }
                 }
 

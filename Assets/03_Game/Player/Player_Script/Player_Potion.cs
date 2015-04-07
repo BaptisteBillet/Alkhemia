@@ -70,7 +70,7 @@ public class Player_Potion : MonoBehaviour
         //Et on lui indique son numéro
         potion_script_1.numero = 1;
 
-
+        /*
         ///VENT
 
         //On rend existance une potion
@@ -104,7 +104,7 @@ public class Player_Potion : MonoBehaviour
 
         //Et on lui indique son numéro
         potion_script_3.numero = 3;
-
+        */
 
     }
 

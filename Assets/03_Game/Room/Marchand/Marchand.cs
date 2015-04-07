@@ -41,7 +41,7 @@ public class Marchand : MonoBehaviour {
 		ouvert = false;
 		ReadyForChange = false;
 	}
-
+    /*
 	void OnCollisionStay2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
@@ -90,6 +90,6 @@ public class Marchand : MonoBehaviour {
 		marchandise_instance.GetComponent<SpriteRenderer>().sortingOrder = (int)(this.gameObject.transform.position.y * 10) * -1;                                                                    
 		
 	}
-
+    */
 
 }

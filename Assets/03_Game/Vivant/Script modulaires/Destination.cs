@@ -27,6 +27,9 @@ public class Destination : MonoBehaviour {
     public float acceleration;
     public float desceleration;
 
+    //Verificateur tir
+    private bool IsShooting;
+
     //Source sprite
     public GameObject source_sprite;
 
@@ -43,7 +46,7 @@ public class Destination : MonoBehaviour {
         down = false;
         left = false;
         right = false;
-
+        IsShooting = false;
      }
 
     void Update()
@@ -56,29 +59,40 @@ public class Destination : MonoBehaviour {
 			if (Vector3.Distance(this.transform.position, destination) > distance && Vector3.Distance(this.transform.position, destination) > delta)
 			{
 			    tireur_script.SetActive(false);
-
+                IsShooting = false;
 
 				deplacement();
 				vecteur();
 				acc_des();
 				animation();
+                anim.SetBool("shooting", false);
+               
 			}
 			else
 			{
 
-				tireur_script.SetActive(true);
 
-				up = false;
-				down = false;
-				right = false;
-				left = false;
 
-				velocity = Vector3.zero;
+                if (IsShooting == false)
+                {
+                    tireur_script.SetActive(true);
+                    IsShooting = true;
 
-				moveSpeed = 0;
-				GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
-				move = false;
-				anim.SetBool("moving", move);
+                    up = false;
+                    down = false;
+                    right = false;
+                    left = false;
+
+                    velocity = Vector3.zero;
+
+                    moveSpeed = 0;
+                    GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+                    move = false;
+                    anim.SetBool("shooting", true);
+                    anim.SetBool("moving", move);
+                    anim.ResetTrigger("shoot");
+                    anim.SetTrigger("shoot");
+                }
 			}
 		}
 		else
@@ -92,17 +106,19 @@ public class Destination : MonoBehaviour {
 			}
 			else
 			{
-				up = false;
-				down = false;
-				right = false;
-				left = false;
+                    up = false;
+                    down = false;
+                    right = false;
+                    left = false;
 
-				velocity = Vector3.zero;
+                    velocity = Vector3.zero;
 
-				moveSpeed = 0;
-				GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
-				move = false;
-				anim.SetBool("moving", move);
+                    moveSpeed = 0;
+                    GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+                    move = false;
+                    anim.SetBool("moving", move);
+
+
 			}
 		}
 

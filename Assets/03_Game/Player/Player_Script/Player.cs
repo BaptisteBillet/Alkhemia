@@ -244,7 +244,7 @@ public class Player : MonoBehaviour {
         //Si on est pas insensibilisé
         if (statut != statut_impact)
         {
-
+            StartCoroutine(clignote());
             //Le statut temporaire change ex empoisonement
             statut_temporaire = statut_impact;
             //Les dégâts se font sur la duree_dps

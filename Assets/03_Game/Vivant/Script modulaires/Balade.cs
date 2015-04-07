@@ -74,6 +74,10 @@ public class Balade : MonoBehaviour {
         //Animation
         public Animator anim;
 
+        //KNOCKBACK
+        private Vector3 knockback_direction;
+        private float knockback_force;
+
 	// Use this for initialization
 	void OnEnable()
     {
@@ -229,6 +233,15 @@ public class Balade : MonoBehaviour {
 			anim.SetBool("moving", false);
 
 			GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            if (knockback_force > 0)
+            {
+                knockback_force -= Time.deltaTime * 5;
+            }
+            else
+            {
+                knockback_force = 0;
+            }
+
 			moveSpeed = 0;
         }
 

@@ -24,8 +24,7 @@ public class Ouverture_sac : MonoBehaviour {
     public bool ouvert;
 	public bool autel;
     public Animator animator;
-	public bool ouvertureForce;
-	public bool IsouvertureForce;
+
     public void letsTremble()
     {
         animator.ResetTrigger("tremble");
@@ -34,16 +33,15 @@ public class Ouverture_sac : MonoBehaviour {
 
 	void Start()
 	{
-		IsouvertureForce = false;
+        ouvert = true;
 	}
 
 	// Update is called once per frame
 	void Update () 
     {
-        if ((Input.GetButtonDown("Back_1") || Input.GetKeyDown(KeyCode.R) || ouvertureForce==true)&&IsouvertureForce==true)
+        if (Input.GetButtonDown("Back_1") || Input.GetKeyDown(KeyCode.R))
         {
 			Debug.Log("sac");
-			IsouvertureForce = false;
             animator.SetBool("ouvert", ouvert);
 			if (ouvert == true) { ouvert = false; }
 			else if (ouvert == false) { ouvert = true; }

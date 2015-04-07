@@ -40,7 +40,7 @@ public class Autel : MonoBehaviour {
 		ouvert = false;
 		ReadyForChange = false;
 	}
-
+    /*
 	void OnCollisionStay2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
@@ -85,6 +85,6 @@ public class Autel : MonoBehaviour {
 	{
 		Instantiate(fraise, pentacle.transform.position, fraise.transform.rotation);
 	}
-
+    */
 
 }
