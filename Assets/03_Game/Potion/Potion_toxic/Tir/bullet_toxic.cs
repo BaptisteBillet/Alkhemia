@@ -16,43 +16,35 @@ public class bullet_toxic : Bullet {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+		
         if(other.gameObject.tag=="Player")
         {
-			if(other.transform.parent)
+			player_script = (Player)other.gameObject.GetComponent(typeof(Player));
+			if (player_script.immortel == false) //SI le vivant n'est pas immortel
 			{
-				if(other.transform.parent.parent)
+				player_script.impact_process(this.transform, impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
+
+				if (player_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
 				{
-					if (other.gameObject.tag == "Player" && this.gameObject != transform.parent.parent && other.gameObject != null) //Si l'on touche le player et que ce n'est pas notre parent
-					{
+					player_script.dps_process(duree_degat, duree_temps, duree_intervalle, statut_bullet, temps_statut);
+				}
 
-						player_script = (Player)other.gameObject.GetComponent(typeof(Player));
-						if (player_script.immortel == false) //SI le vivant n'est pas immortel
-						{
-							player_script.impact_process(this.transform, impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
-
-							if (player_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
-							{
-
-								player_script.dps_process(duree_degat, duree_temps, duree_intervalle, statut_bullet, temps_statut);
-							}
-
-							if (impact_mort == true)
-							{
-								Destroy(this.gameObject);
-							}
-						}
-
-					}
+				if (impact_mort == true)
+				{
+					
+					Destroy(this.gameObject);
 				}
 			}
+
+			
+
             //DEGAT PLAYER
             
         }
 
-		
         if (other.gameObject.tag == "vivant") //Si l'on touche un vivant et que ce n'est pas notre parent
         {
+
 			if (this.gameObject.transform.parent)
 			{
                 if (this.gameObject != transform.parent.parent || this.gameObject != transform.parent)
@@ -61,7 +53,7 @@ public class bullet_toxic : Bullet {
                    
 					if (vivant_script.immortel == false && other.gameObject != null) //SI le vivant n'est pas immortel
 					{
-
+						
 						vivant_script.impact_process(this.transform, impact_degat, statut_bullet, temps_statut); //Dégât à l'impact, changement de statut sur une durée
 
 						if (vivant_script.statut != statut_bullet && duree_degat > 0) //Si il n'est pas immunisé
@@ -71,23 +63,23 @@ public class bullet_toxic : Bullet {
 
 						if (impact_mort == true)
 						{
+							
 							Destroy(this.gameObject);
 						}
 					}
 				}
 			}
         }
-
+		
 
         if (other.gameObject.tag == "bullet")
         {
 
-            bullet_script = (Bullet)other.gameObject.GetComponent(typeof(Bullet));
-
-            if (bullet_script.name == "bullet_feu")
+			if (other.name == "bullet_feu(Clone)")
             {
                 Destroy(other.gameObject);
-                Destroy(this.gameObject);
+				GameObject Parent = this.gameObject.transform.parent.gameObject;
+                Destroy(Parent);
                 explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation
                 explosion.transform.position = this.gameObject.transform.position;
 
@@ -101,11 +93,12 @@ public class bullet_toxic : Bullet {
             explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation
             explosion.transform.position = this.gameObject.transform.position;
         }
-
+		/*
         if (other.gameObject.tag == "mur")
-        {
+		{
+			Debug.Log("ATTENTION MUR");
             Destroy(this.gameObject);
-        }
+        }*/
         
 
     }

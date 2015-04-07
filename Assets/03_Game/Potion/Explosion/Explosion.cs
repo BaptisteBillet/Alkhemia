@@ -26,7 +26,6 @@ public class Explosion : MonoBehaviour
         if (other.tag == "Player")
         {
 
-           
                 player_script = (Player)other.gameObject.GetComponent(typeof(Player));
 
                 player_script.impact_process(this.transform,degats, "feu", 2);

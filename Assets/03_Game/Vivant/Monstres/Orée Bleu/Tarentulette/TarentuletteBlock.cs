@@ -16,15 +16,15 @@ public class TarentuletteBlock : MonoBehaviour {
 	{
 		IsBlock = true;
 
-		position1 = Instantiate(bloqueur, position1.transform.position, bloqueur.transform.rotation) as GameObject;
+		//position1 = Instantiate(bloqueur, position1.transform.position, bloqueur.transform.rotation) as GameObject;
 		position2=Instantiate(bloqueur, position2.transform.position, bloqueur.transform.rotation) as GameObject ;
-		position3=Instantiate(bloqueur, position3.transform.position, bloqueur.transform.rotation) as GameObject ;
-		position4=Instantiate(bloqueur, position4.transform.position, bloqueur.transform.rotation) as GameObject ;
+		//position3=Instantiate(bloqueur, position3.transform.position, bloqueur.transform.rotation) as GameObject ;
+		//position4=Instantiate(bloqueur, position4.transform.position, bloqueur.transform.rotation) as GameObject ;
 
-        position1.transform.parent = this.gameObject.transform.parent.parent;
+        //position1.transform.parent = this.gameObject.transform.parent.parent;
         position2.transform.parent = this.gameObject.transform.parent.parent;
-        position3.transform.parent = this.gameObject.transform.parent.parent;
-        position4.transform.parent = this.gameObject.transform.parent.parent;
+        //position3.transform.parent = this.gameObject.transform.parent.parent;
+        //position4.transform.parent = this.gameObject.transform.parent.parent;
 	}
 
 }

@@ -28,7 +28,7 @@ public class Tireur : MonoBehaviour
 		//INSTANTIATION
 		bullet = Instantiate(bullet_prefab, this.gameObject.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
 		bullet.transform.parent = this.gameObject.transform.parent.parent.parent;
-
+		bullet.transform.localPosition = new Vector3(this.transform.position.x-0.5f, this.transform.position.y+1, this.transform.position.z);
 
 		dir = new Vector3(m_Player.transform.position.x - this.gameObject.transform.parent.transform.position.x, m_Player.transform.position.y - 1 - this.gameObject.transform.parent.transform.position.y, m_Player.transform.position.z).normalized;
 		//dir = cible.transform.position.normalized;

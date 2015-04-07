@@ -29,6 +29,7 @@ public class Potion_feu : Potion {
     //Pour le refresh de la duree du sort
      private float refresh;
 
+	 public GameObject flash;
 
     //Pour la manette xbox
     private int gachette_actif;
@@ -147,6 +148,7 @@ public class Potion_feu : Potion {
                 initialisation_bullet(); //Parametre de la bullet
                 bullet = Instantiate(bullet_prefab, fleche.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
 
+				Instantiate(flash, fleche.transform.position, bullet_prefab.transform.rotation);
 
                 //AJOUT en temps que child
                 bullet.transform.parent = transform;

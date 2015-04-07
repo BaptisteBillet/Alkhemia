@@ -17,6 +17,9 @@ public class Plante_gaz : Vivant {
 	private GameObject cendre;
 
 	private bool mort;
+
+	private bool IsFire;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -40,16 +43,14 @@ public class Plante_gaz : Vivant {
 			anim.ResetTrigger("produit");
 			anim.SetTrigger("produit");
             //création du nuage
-            toxic_nuage = Instantiate(toxic_nuage_prefab) as GameObject; //Instantiation
+            toxic_nuage = Instantiate(toxic_nuage_prefab,new Vector3(this.transform.position.x,this.transform.position.y+0.5f,this.transform.position.z),this.transform.rotation) as GameObject; //Instantiation
 
 			toxic_nuage.transform.position = this.transform.parent.position;
 			toxic_nuage.transform.parent = this.transform.parent.parent;
-            //toxic_nuage.transform.localPosition = new Vector3(-1,2.2f,0);
-            /*
-            toxic_nuage_script = (Bullet)toxic_nuage.GetComponent(typeof(Bullet));
 
-            toxic_nuage.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-           */
+			toxic_nuage.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+
+
 
             yield return new WaitForSeconds(delay_new_fongus_cloud);
             
@@ -64,10 +65,16 @@ public class Plante_gaz : Vivant {
     {
         if(life<=0 && mort==false)
         {
+			if (statut_temporaire == "feu")
+			{
+				IsFire = true;
+			}
+
 			mort = true;
 			producteur = false;
 			producteur_ok = false;
-			anim.SetTrigger("explosion");
+			anim.ResetTrigger("production");
+			anim.SetBool("explosion",true);
             explosion_prefab.transform.position = this.gameObject.transform.position;
 
             explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation
@@ -83,7 +90,7 @@ public class Plante_gaz : Vivant {
 
 	public void Cendre()
 	{
-		if (statut_temporaire == "feu")
+		if (IsFire == true)
 		{
 				cendre = Instantiate(cendre_prefab,this.transform.position,cendre_prefab.transform.rotation ) as GameObject; //Instantiation
 		}

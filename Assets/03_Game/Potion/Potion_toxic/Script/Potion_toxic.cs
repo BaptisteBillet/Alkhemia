@@ -39,6 +39,7 @@ public class Potion_toxic : Potion
     private Vector3 last_xbox;
     private bool gachette_sort;
 
+	public GameObject flash;
 
 	void Start () 
     {
@@ -150,7 +151,7 @@ public class Potion_toxic : Potion
                 //INSTANTIATION
                 initialisation_bullet(); //Parametre de la bullet
                 bullet = Instantiate(bullet_prefab, fleche.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
-
+				Instantiate(flash, fleche.transform.position, bullet_prefab.transform.rotation);
 
                 //AJOUT en temps que child
                 bullet.transform.parent = transform;

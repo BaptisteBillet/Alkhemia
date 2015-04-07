@@ -25,13 +25,13 @@ public class Explosable : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.gameObject.tag == "explosion")
+		
+		if (other.gameObject.tag == "explosion")
         {
+			Debug.Log(this.gameObject);
                 Destroy(this.gameObject);
                 explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation
                 explosion.transform.position = this.gameObject.transform.position;
-
         }
     }
     
