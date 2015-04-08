@@ -284,6 +284,8 @@ public class IA_manager : MonoBehaviour {
                     Fuis_script.enabled = false;
                 }
                 break;
+
+           
         }
     }
 
@@ -306,7 +308,7 @@ public class IA_manager : MonoBehaviour {
                {
                    if (Destination_script == true)
                    {
-                       modules_deplacements("destination");
+                       modules_deplacements("stop");
                    }
 
                    Tireur_script.enabled = true;
@@ -336,6 +338,7 @@ public class IA_manager : MonoBehaviour {
            {
                modules_deplacements("patrouille");
            }
+          
        }
 
        if (reaction_contact_fuite == true)            //Si il y a contact, est-ce que le sujet fuit?

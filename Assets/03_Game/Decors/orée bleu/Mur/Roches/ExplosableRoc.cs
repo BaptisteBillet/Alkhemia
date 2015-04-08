@@ -31,6 +31,7 @@ public class ExplosableRoc : MonoBehaviour
 
 		if (other.gameObject.tag == "explosion")
 		{
+			CameraEventManager.emit(EventManagerType.FISHEYEBUMP);
 			anim.SetTrigger("explose");
 		}
 	}

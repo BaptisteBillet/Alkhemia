@@ -200,7 +200,7 @@ public class Potion_feu : Potion {
     
             //Dépense
             quantite -= sort_depense;
-
+			player_script.CanMove = false;
            if(active==false)
            {
             active = true;

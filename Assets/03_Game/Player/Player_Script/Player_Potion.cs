@@ -167,6 +167,7 @@ public class Player_Potion : MonoBehaviour
 
         anim.SetBool("tir_actif", tir_actif);
 
+
     }
 
 

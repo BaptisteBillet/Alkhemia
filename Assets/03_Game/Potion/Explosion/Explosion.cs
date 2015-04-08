@@ -15,7 +15,8 @@ public class Explosion : MonoBehaviour
     void Start()
     {
         ShakeManager.instance.LetsShake(false,300);
-        Destroy(this.gameObject, 1f);
+		CameraEventManager.emit(EventManagerType.FISHEYEBUMP);
+        Destroy(this.gameObject, 0.8f);
     }
 
     void OnTriggerEnter2D(Collider2D other)

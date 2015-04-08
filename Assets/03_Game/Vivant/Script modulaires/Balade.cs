@@ -95,7 +95,7 @@ public class Balade : MonoBehaviour {
 
         //rigidbody2D.velocity *= 0;
 
-        if (anim == null)
+        if (anim != null)
         {
             anim = source_sprite.GetComponent<Animator>();
             anim.SetBool("moving", false);

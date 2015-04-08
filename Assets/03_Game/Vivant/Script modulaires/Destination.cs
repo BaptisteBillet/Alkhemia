@@ -51,61 +51,65 @@ public class Destination : MonoBehaviour {
 
     void Update()
     {
-       
-        destination = cible.position;
+        if (cible != null)
+        {
+            destination = cible.position;
 
-		if (tireur_script != null)
-		{
-			if (Vector3.Distance(this.transform.position, destination) > distance && Vector3.Distance(this.transform.position, destination) > delta)
-			{
-			    tireur_script.SetActive(false);
-                IsShooting = false;
-
-				deplacement();
-				vecteur();
-				acc_des();
-				animation();
-                anim.SetBool("shooting", false);
-               
-			}
-			else
-			{
-
-
-
-                if (IsShooting == false)
+            if (tireur_script != null)
+            {
+                if (Vector3.Distance(this.transform.position, destination) > distance && Vector3.Distance(this.transform.position, destination) > delta)
                 {
-                    tireur_script.SetActive(true);
-                    IsShooting = true;
+                    
+                    
+                    IsShooting = false;
+                    
+                    deplacement();
+                    vecteur();
+                    acc_des();
+                    animation();
 
-                    up = false;
-                    down = false;
-                    right = false;
-                    left = false;
-
-                    velocity = Vector3.zero;
-
-                    moveSpeed = 0;
-                    GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
-                    move = false;
-                    anim.SetBool("shooting", true);
-                    anim.SetBool("moving", move);
-                    anim.ResetTrigger("shoot");
-                    anim.SetTrigger("shoot");
                 }
-			}
-		}
-		else
-		{
-			if (Vector3.Distance(this.transform.position, destination) > distance)
-			{
-				deplacement();
-				vecteur();
-				acc_des();
-				animation();
-			}
-			else
-			{
+                else
+                {
+
+
+
+                    if (IsShooting == false)
+                    {
+                        
+                        IsShooting = true;
+
+                        up = false;
+                        down = false;
+                        right = false;
+                        left = false;
+
+                        velocity = Vector3.zero;
+
+                        moveSpeed = 0;
+                        GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+                        move = false;
+                        anim.SetBool("shooting", true);
+                        anim.SetBool("moving", move);
+                        anim.ResetTrigger("shoot");
+                        anim.SetTrigger("shoot");
+                    }
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(this.transform.position, destination) > distance)
+                {
+                    deplacement();
+                    vecteur();
+                    acc_des();
+                    animation();
+                    move = true;
+                    anim.SetBool("moving", move);
+                    anim.SetBool("mirror", mirror);
+                }
+                else
+                {
                     up = false;
                     down = false;
                     right = false;
@@ -117,13 +121,14 @@ public class Destination : MonoBehaviour {
                     GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
                     move = false;
                     anim.SetBool("moving", move);
+                    anim.SetBool("mirror", mirror);
 
 
-			}
-		}
+                }
+            }
 
 
-
+        }
     }
 
 
@@ -303,18 +308,6 @@ public class Destination : MonoBehaviour {
 			mirror = false;
 		}
 
-		if (anim != null)
-		{
-			anim.SetBool("moving", true);
-			anim.SetBool("mirror", mirror);
-		}
-
-
-		if (anim != null)
-		{
-			anim.SetBool("moving", move);
-			anim.SetBool("mirror", mirror);
-		}
 
 	}
 	#endregion 

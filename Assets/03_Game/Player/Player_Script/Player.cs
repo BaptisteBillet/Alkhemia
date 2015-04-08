@@ -110,11 +110,15 @@ public class Player : MonoBehaviour {
 	//KNOCKBACK
 	private Vector3 knockback_direction;
 	private float knockback_force;
-	
+
+	public bool CanMove;
+	private bool sort;
+
 
     ///////////////////////////////////////////////////////
 	void Awake ()
     {
+		CanMove = true;
         //donjon_script = (Donjon)donjon.GetComponent(typeof(Donjon));
 		rigidbody = GetComponent<Rigidbody2D>();
         delay = 0; //Doit rester à 0
@@ -207,6 +211,21 @@ public class Player : MonoBehaviour {
             alertelaunched = true;
             ShakeManager.instance.LetsShakeLife(this);
         }
+
+		if(CanMove==false && sort==false)
+		{
+			sort = true;
+			anim.SetTrigger("sort");
+			//Déplacement
+
+			
+			
+		}
+
+		if(CanMove==true)
+		{
+			sort = false;
+		}
 
         
     }
@@ -691,42 +710,42 @@ public class Player : MonoBehaviour {
     void directions()
     {
         
-        if (Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("L_YAxis_1") < 0) || Input.GetKey(KeyCode.Z))
-        {
-            up = true;
-        }
-        else
-        {
-            up = false;
-        }
-        //
-        if (Input.GetKey(KeyCode.DownArrow) || (Input.GetAxis("L_YAxis_1") > 0) || Input.GetKey(KeyCode.S))
-        {
-            down = true;
-        }
-        else
-        {
-            down = false;
-        }
-        //
-        if (Input.GetKey(KeyCode.LeftArrow) || (Input.GetAxis("L_XAxis_1") < 0) || Input.GetKey(KeyCode.Q))
-        {
-            left = true;
-        }
-        else
-        {
-            left = false;
-        }
-        //
-        if (Input.GetKey(KeyCode.RightArrow) || (Input.GetAxis("L_XAxis_1") > 0) || Input.GetKey(KeyCode.D))
-        {
-            right = true;
-        }
-        else
-        {
-            right = false;
-        }
-
+			if (Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("L_YAxis_1") < 0) || Input.GetKey(KeyCode.Z))
+			{
+				up = true;
+			}
+			else
+			{
+				up = false;
+			}
+			//
+			if (Input.GetKey(KeyCode.DownArrow) || (Input.GetAxis("L_YAxis_1") > 0) || Input.GetKey(KeyCode.S))
+			{
+				down = true;
+			}
+			else
+			{
+				down = false;
+			}
+			//
+			if (Input.GetKey(KeyCode.LeftArrow) || (Input.GetAxis("L_XAxis_1") < 0) || Input.GetKey(KeyCode.Q))
+			{
+				left = true;
+			}
+			else
+			{
+				left = false;
+			}
+			//
+			if (Input.GetKey(KeyCode.RightArrow) || (Input.GetAxis("L_XAxis_1") > 0) || Input.GetKey(KeyCode.D))
+			{
+				right = true;
+			}
+			else
+			{
+				right = false;
+			}
+		
     }
 
     void vecteur()
@@ -842,7 +861,7 @@ public class Player : MonoBehaviour {
     {
         
         //Déplacements
-        if (general_time > 0 && life > 0) //Si le joueur est en vie
+        if (general_time > 0 && life > 0 && CanMove==true) //Si le joueur est en vie
         {
             //On check les inputs pour savoir les directions
             directions();
@@ -856,6 +875,12 @@ public class Player : MonoBehaviour {
             //On anim le personnage
             animation();
         }
+
+		if(CanMove==false)
+		{
+			//Déplacements
+			GetComponent<Rigidbody2D>().velocity = velocity * 0;
+		}
 
         
     }

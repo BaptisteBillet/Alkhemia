@@ -28,6 +28,7 @@ public class Explosable : MonoBehaviour {
 		
 		if (other.gameObject.tag == "explosion")
         {
+			CameraEventManager.emit(EventManagerType.FISHEYEBUMP);
 			Debug.Log(this.gameObject);
                 Destroy(this.gameObject);
                 explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation

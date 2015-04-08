@@ -200,6 +200,9 @@ public class Potion_toxic : Potion
 
         if (((Input.GetMouseButtonDown(1) || gachette_sort == true) && quantite - sort_depense >= 0) && player_potion_script.potion_actuel == numero && BagManager.instance.m_CanShoot == true)
         {
+
+			player_script.CanMove = false;
+
             Debug.Log("toxic");
             //Dépense
             quantite -= sort_depense;
