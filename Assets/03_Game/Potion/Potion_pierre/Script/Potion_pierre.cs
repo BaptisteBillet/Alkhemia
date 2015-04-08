@@ -31,7 +31,7 @@ public class Potion_pierre : Potion {
 
 
     //Pour la manette xbox
-    private int gachette_actif;
+//    private int gachette_actif;
     private Vector3 last_xbox;
     private bool gachette_sort;
 

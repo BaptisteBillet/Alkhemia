@@ -120,6 +120,8 @@ public class Player_Potion : MonoBehaviour
                     //tab_potion[potion_actuel].gameObject.SetActive(false);  //On désactive la potion active actuel, ancienne
                     potion_actuel = 0;                                          //Cette potion devient l'actuel
                     potion_script_0.active = false;                              //On active la potion
+					potion_script_1.SwappedPotion();
+					potion_script_0.SwappedPotion();
                     //tab_potion[potion_actuel].gameObject.SetActive(true);   //On active la potion active nouvelle
                 }
             }
@@ -132,7 +134,9 @@ public class Player_Potion : MonoBehaviour
                 {
                     //tab_potion[potion_actuel].gameObject.SetActive(false);  //On désactive la potion active actuel, ancienne
                     potion_actuel = 1;                                          //Cette potion devient l'actuel
-                    potion_script_1.active = false;                              //On active la potion
+					potion_script_1.active = false;                              //On active la potion
+					potion_script_0.SwappedPotion();
+					potion_script_1.SwappedPotion();
                     //tab_potion[potion_actuel].gameObject.SetActive(true);   //On active la potion active nouvelle
                 }
             }

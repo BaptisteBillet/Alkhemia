@@ -40,6 +40,7 @@ public class Destination : MonoBehaviour {
 
 	public GameObject tireur_script;
 
+
     void OnEnable()
     {
         up = false;
@@ -47,6 +48,9 @@ public class Destination : MonoBehaviour {
         left = false;
         right = false;
         IsShooting = false;
+
+		
+		
      }
 
     void Update()
@@ -57,11 +61,9 @@ public class Destination : MonoBehaviour {
 
             if (tireur_script != null)
             {
-                if (Vector3.Distance(this.transform.position, destination) > distance && Vector3.Distance(this.transform.position, destination) > delta)
+
+                if (Vector3.Distance(this.transform.position, destination) > distance)
                 {
-                    
-                    
-                    IsShooting = false;
                     
                     deplacement();
                     vecteur();
@@ -71,13 +73,6 @@ public class Destination : MonoBehaviour {
                 }
                 else
                 {
-
-
-
-                    if (IsShooting == false)
-                    {
-                        
-                        IsShooting = true;
 
                         up = false;
                         down = false;
@@ -89,11 +84,10 @@ public class Destination : MonoBehaviour {
                         moveSpeed = 0;
                         GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
                         move = false;
-                        anim.SetBool("shooting", true);
+
                         anim.SetBool("moving", move);
-                        anim.ResetTrigger("shoot");
-                        anim.SetTrigger("shoot");
-                    }
+
+                    
                 }
             }
             else
@@ -128,7 +122,23 @@ public class Destination : MonoBehaviour {
             }
 
 
-        }
+        }else
+		{
+			up = false;
+			down = false;
+			right = false;
+			left = false;
+
+			velocity = Vector3.zero;
+
+			moveSpeed = 0;
+			GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+			move = false;
+
+			anim.SetBool("moving", move);
+
+		}
+
     }
 
 

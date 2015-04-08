@@ -78,6 +78,9 @@ public class Balade : MonoBehaviour {
         private Vector3 knockback_direction;
         private float knockback_force;
 
+		private float delta = 0.2f;
+
+
 	// Use this for initialization
 	void OnEnable()
     {
@@ -137,8 +140,6 @@ public class Balade : MonoBehaviour {
         pause_en_cours = false;
 
         StartCoroutine(balade());
-
-        yield return null;
     }
 
     IEnumerator balade()
@@ -207,8 +208,6 @@ public class Balade : MonoBehaviour {
         yield return new WaitForSeconds(temps_ballade);
         balade_en_cours = false;
         StartCoroutine(pause_balade());
-
-        yield return null;
     }
 
     void Update()
@@ -257,7 +256,7 @@ public class Balade : MonoBehaviour {
 		}
 		else
 		{
-			if (transform.position.x > destination.x - 0.2f && transform.position.x < destination.x + 0.2f)
+			if (Mathf.Abs(transform.position.x - destination.x) < delta)
 			{
 				left = false; right = false;
 			}
@@ -287,7 +286,7 @@ public class Balade : MonoBehaviour {
         }
 		else
 		{
-			if (transform.position.y > destination.y - 0.2f && transform.position.y < destination.y + 0.2f)
+			if (Mathf.Abs(transform.position.y - destination.y) < delta)
 			{
 				up = false; down = false;
 			}
@@ -355,6 +354,12 @@ public class Balade : MonoBehaviour {
             velocity = new Vector3(1, 0, 0);
             if (rotate == true) { this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);}
         }
+
+		if (!up && !down && !right && !left)
+		{
+			velocity *= 0;
+			anim.SetBool("moving", false);
+		}
 
     }
     void acc_des()

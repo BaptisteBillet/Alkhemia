@@ -32,7 +32,7 @@ public class Potion_feu : Potion {
 	 public GameObject flash;
 
     //Pour la manette xbox
-    private int gachette_actif;
+	//private int gachette_actif; //Commenté par Jerome
     private Vector3 last_xbox;
     private bool gachette_sort;
 
@@ -130,7 +130,7 @@ public class Potion_feu : Potion {
         if (gachette_actif == 1 && player_potion_script.potion_actuel == numero)
         {
             gachette_actif = 2;
-            StartCoroutine(debit());
+            StartCoroutine("debit");
 
             player_potion_script.tir_actif = true;
 
@@ -244,8 +244,5 @@ public class Potion_feu : Potion {
 
         yield return null;
     }
-
-
-    
 
 }

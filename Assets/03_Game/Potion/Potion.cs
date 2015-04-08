@@ -38,5 +38,11 @@ public class Potion : MonoBehaviour {
         active = false;
 	}
 
-
+	//PAR JEROME: J'ai fait gerer ca par toutes les potions, quand on change de potion ça reset ça
+	protected int gachette_actif;
+	public void SwappedPotion()
+	{
+		StopCoroutine("debit");
+		gachette_actif = 0;
+	}
 }

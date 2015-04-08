@@ -35,7 +35,6 @@ public class Potion_toxic : Potion
 
 
     //Pour la manette xbox
-    private int gachette_actif;
     private Vector3 last_xbox;
     private bool gachette_sort;
 
@@ -106,7 +105,6 @@ public class Potion_toxic : Potion
 
         yield return new WaitForSeconds(frequence);
         gachette_actif = 0;
-        yield return null;
     }
 
 	// Update is called once per frame
@@ -117,56 +115,53 @@ public class Potion_toxic : Potion
         //ACTIF
         ////////////////////////////////////////////////////////////////////////
 
+		if (player_potion_script.potion_actuel == numero)
+		{
+			if (gachette_actif == 0)
+				if (BagManager.instance.m_CanShoot)
+					if ((Input.GetAxis("TriggersR_1") == 1 || Input.GetMouseButton(0)))// && (Mathf.Abs(Input.GetAxis("R_XAxis_1")) + Mathf.Abs(Input.GetAxis("R_YAxis_1")) >= 0.9f))
+						gachette_actif = 1;
+
+			if (gachette_actif == 0)
+				player_potion_script.tir_actif = false;
+
+			if (gachette_actif == 1)
+			{
+				gachette_actif = 2;
+				StartCoroutine("debit");
+
+				player_potion_script.tir_actif = true;
+
+				//CALCUL de la direction de la souris
+				Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
+				//Vector3 dir = (Input.mousePosition - sp).normalized;
+
+				Vector3 dir = fleche.transform.right;
+
+				if (quantite - actif_depense >= 0) //Si il reste assez de potion
+				{
+
+					//INSTANTIATION
+					initialisation_bullet(); //Parametre de la bullet
+					bullet = Instantiate(bullet_prefab, fleche.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
+
+					Instantiate(flash, fleche.transform.position, bullet_prefab.transform.rotation);
+
+					//AJOUT en temps que child
+					bullet.transform.parent = transform;
+					//bullet.transform.position = transform.position;
+
+					//ENVOI dans une direction
+					bullet.GetComponent<Rigidbody2D>().velocity = (dir);
+					//bullet.rigidbody2D.velocity = new Vector2(dir.x,dir.y) * actif_vitesse * Time.deltaTime;
+					//On consome la potion
+					quantite -= actif_depense;
+				}
 
 
-        if ((Input.GetAxis("TriggersR_1") == 1 || Input.GetMouseButton(0)) && gachette_actif == 0 && BagManager.instance.m_CanShoot == true)// && (Mathf.Abs(Input.GetAxis("R_XAxis_1")) + Mathf.Abs(Input.GetAxis("R_YAxis_1")) >= 0.9f))
-        {
-            gachette_actif = 1;
 
-        }
-
-        if (gachette_actif == 0)
-        {
-            player_potion_script.tir_actif = false;
-        }
-
-
-
-        if (gachette_actif == 1 && player_potion_script.potion_actuel == numero )
-        {
-            gachette_actif = 2;
-            StartCoroutine(debit());
-
-            player_potion_script.tir_actif = true;
-
-            //CALCUL de la direction de la souris
-            Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
-            //Vector3 dir = (Input.mousePosition - sp).normalized;
-
-            Vector3 dir = fleche.transform.right;
-
-            if(quantite-actif_depense>=0) //Si il reste assez de potion
-            {
-
-                //INSTANTIATION
-                initialisation_bullet(); //Parametre de la bullet
-                bullet = Instantiate(bullet_prefab, fleche.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
-				Instantiate(flash, fleche.transform.position, bullet_prefab.transform.rotation);
-
-                //AJOUT en temps que child
-                bullet.transform.parent = transform;
-                //bullet.transform.position = transform.position;
-
-                //ENVOI dans une direction
-                bullet.GetComponent<Rigidbody2D>().velocity = (dir);
-                //bullet.rigidbody2D.velocity = new Vector2(dir.x,dir.y) * actif_vitesse * Time.deltaTime;
-                //On consome la potion
-                quantite -= actif_depense;
-            }
-
-            
-  
-        }
+			}
+		}
 
         //On enleve toutes les bullets si le joueur sort de la map
         if (last_actual != Donjon.id_room_actual)
@@ -198,7 +193,10 @@ public class Potion_toxic : Potion
 
 
 
-        if (((Input.GetMouseButtonDown(1) || gachette_sort == true) && quantite - sort_depense >= 0) && player_potion_script.potion_actuel == numero && BagManager.instance.m_CanShoot == true)
+        if ((Input.GetMouseButtonDown(1) || gachette_sort == true))
+			if(quantite - sort_depense >= 0) 
+				if(player_potion_script.potion_actuel == numero)
+					if(BagManager.instance.m_CanShoot == true)
         {
 
 			player_script.CanMove = false;
@@ -250,8 +248,6 @@ public class Potion_toxic : Potion
 
         yield return null;
     }
-
-
     
 
 }

@@ -78,8 +78,9 @@ public class bullet_toxic : Bullet {
 			if (other.name == "bullet_feu(Clone)")
             {
                 Destroy(other.gameObject);
-				GameObject Parent = this.gameObject.transform.parent.gameObject;
-                Destroy(Parent);
+				//GameObject Parent = this.gameObject.transform.parent.gameObject;
+				//Destroy(Parent);
+				//Passage Jérôme, incompréhension, perxplexitué
                 explosion = Instantiate(explosion_prefab) as GameObject; //Instantiation
                 explosion.transform.position = this.gameObject.transform.position;
 
