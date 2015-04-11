@@ -105,6 +105,7 @@ public class Tarentulette_IA : MonoBehaviour {
         {
             Isbloc = true;
             anim.SetTrigger("bloc");
+			SoundManagerEvent.emit(SoundManagerType.FIGHT);
         }
     }
 

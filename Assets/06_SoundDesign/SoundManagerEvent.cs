@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
  * Comment émettre un event:
-		CameraEventManager.emit(EventManagerType.ENEMY_HIT, this.gameObject);
+		SoundManagerEvent.emit(EventManagerType.ENEMY_HIT);
  * 
  * Comment traiter un event (dans un start ou un initialisation)
 		EventManagerScript.onEvent += (EventManagerType emt, GameObject go) => {
@@ -28,14 +28,25 @@ using System.Collections;
 
 public enum SoundManagerType
 {
-	SHOOT
+	DAMAGE,
+	FIGHT,
+	FIRE_START,
+	FIRE_LOOP,
+	GAZ,
+	OREEBLEUE,
+	PLAYER_POTION,
+	PLAYER_INTERRACTION,
+	POTION,
+	SPIDER_DIE,
+	SPIDER_SPLIT
+
 
 }
 
 public class SoundManagerEvent : MonoBehaviour
 {
 
-	public delegate void EventAction(SoundManagerType emt, AudioSource audio_source);
+	public delegate void EventAction(SoundManagerType emt);
 	public static event EventAction onEvent;
 
 	#region Singleton
@@ -59,15 +70,14 @@ public class SoundManagerEvent : MonoBehaviour
 
 	void Start()
 	{
-		SoundManagerEvent.onEvent += (SoundManagerType emt, AudioSource audio_source ) => { Debug.Log("&"); };
+		SoundManagerEvent.onEvent += (SoundManagerType emt) => { Debug.Log("&"); };
 	}
 
-	public static void emit(SoundManagerType emt, AudioSource audio_source)
-	{
+	public static void emit(SoundManagerType emt)	{
 		
 		if (onEvent != null)
 		{
-			onEvent(emt,audio_source);
+			onEvent(emt);
 		}
 	}
 

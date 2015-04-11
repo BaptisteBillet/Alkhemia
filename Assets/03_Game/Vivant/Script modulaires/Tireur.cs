@@ -33,7 +33,7 @@ public class Tireur : MonoBehaviour
 		//INSTANTIATION
 		bullet = Instantiate(bullet_prefab, this.gameObject.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation
 		bullet.transform.parent = this.gameObject.transform.parent.parent.parent;
-
+		SoundManagerEvent.emit(SoundManagerType.SPIDER_SPLIT);
 		//if(IA_script.mirror==true)
 		//{
 		//	bullet.transform.localPosition = new Vector3(this.transform.position.x + 0.5f, this.transform.position.y + 1, this.transform.position.z);

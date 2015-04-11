@@ -38,6 +38,7 @@ public class Plante_gaz : Vivant {
     // Création de nuages toxic
     IEnumerator fongus()
     {
+		SoundManagerEvent.emit(SoundManagerType.GAZ);
         while(life>0)
         {
 			anim.ResetTrigger("produit");

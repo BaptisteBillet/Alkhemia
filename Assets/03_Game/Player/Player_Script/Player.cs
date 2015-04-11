@@ -288,6 +288,7 @@ public class Player : MonoBehaviour {
     {
         ShakeManager.instance.LetsShake(true);
         StartCoroutine(impact(position_agresseur,degat_impact, statut_impact, temps_impact));
+		SoundManagerEvent.emit(SoundManagerType.DAMAGE);
     }
 
     //Dégât à l'impact
@@ -491,7 +492,7 @@ public class Player : MonoBehaviour {
                             if (place_inventaire > 0)
                             {
                                 StartCoroutine(recolte(vivant_script.temps_recolte, other.gameObject, other.gameObject.tag));
-
+								SoundManagerEvent.emit(SoundManagerType.PLAYER_INTERRACTION );
                                 //on lance l'anim de récolte
                                 anim.SetTrigger("recolting");
                             }

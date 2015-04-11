@@ -94,7 +94,7 @@ public class Potion_toxic : Potion
         bullet_script.duree_couldown = duree_couldown;      //Les dps se font pendant ce temps
         bullet_script.duree_intervalle = duree_intervalle;  //Le s de dps
 
-
+		SoundManagerEvent.emit(SoundManagerType.GAZ );
 
         //Nécessaire
         active = false;
@@ -140,7 +140,7 @@ public class Potion_toxic : Potion
 
 				if (quantite - actif_depense >= 0) //Si il reste assez de potion
 				{
-
+					SoundManagerEvent.emit(SoundManagerType.GAZ);
 					//INSTANTIATION
 					initialisation_bullet(); //Parametre de la bullet
 					bullet = Instantiate(bullet_prefab, fleche.transform.position, bullet_prefab.transform.rotation) as GameObject; //Instantiation

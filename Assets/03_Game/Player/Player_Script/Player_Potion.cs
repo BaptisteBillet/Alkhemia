@@ -116,7 +116,8 @@ public class Player_Potion : MonoBehaviour
             if(tab_potion[0]!=null) //Si il existe une potion à cet emplacement
             {
                 if (potion_script_0.active == false) //Si cette potion n'est pas l'ancienne
-                {
+				{
+					SoundManagerEvent.emit(SoundManagerType.PLAYER_POTION);
                     //tab_potion[potion_actuel].gameObject.SetActive(false);  //On désactive la potion active actuel, ancienne
                     potion_actuel = 0;                                          //Cette potion devient l'actuel
                     potion_script_0.active = false;                              //On active la potion
@@ -131,7 +132,8 @@ public class Player_Potion : MonoBehaviour
             if (tab_potion[1] != null)
             {
                 if (potion_script_1.active == false)
-                {
+				{
+					SoundManagerEvent.emit(SoundManagerType.PLAYER_POTION);
                     //tab_potion[potion_actuel].gameObject.SetActive(false);  //On désactive la potion active actuel, ancienne
                     potion_actuel = 1;                                          //Cette potion devient l'actuel
 					potion_script_1.active = false;                              //On active la potion
@@ -146,7 +148,8 @@ public class Player_Potion : MonoBehaviour
             if (tab_potion[2] != null)
             {
                 if (potion_script_2.active == false)
-                {
+				{
+
                     //tab_potion[potion_actuel].gameObject.SetActive(false);  //On désactive la potion active actuel, ancienne
                     potion_actuel = 2;                                          //Cette potion devient l'actuel
                     potion_script_2.active = false;                              //On active la potion

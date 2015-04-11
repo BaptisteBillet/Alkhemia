@@ -90,7 +90,7 @@ public class Potion_feu : Potion {
         bullet_script.duree_couldown = duree_couldown;      //Les dps se font pendant ce temps
         bullet_script.duree_intervalle = duree_intervalle;  //Le s de dps
 
-
+		SoundManagerEvent.emit(SoundManagerType.FIRE_START);
 
         //
         active = false;
@@ -197,7 +197,7 @@ public class Potion_feu : Potion {
 
         if (((Input.GetMouseButtonDown(1) || gachette_sort == true) && quantite - sort_depense >= 0) && player_potion_script.potion_actuel == numero )
         {
-    
+			SoundManagerEvent.emit(SoundManagerType.FIRE_LOOP);
             //Dépense
             quantite -= sort_depense;
 			player_script.CanMove = false;
