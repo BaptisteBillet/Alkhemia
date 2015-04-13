@@ -519,15 +519,19 @@ public class Player : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other)
 	{
-
+		sprite_E.SetActive(false);
+		sprite_RB.SetActive(false);
+		
 	}
 
     IEnumerator recolte(float temps, GameObject other, string objet)
     {
+		sprite_E.SetActive(false);
+		sprite_RB.SetActive(false);
         if (objet == "vivant" && place_inventaire>0)
         {
             vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-            cadran = Instantiate(cadran_prefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z), Quaternion.identity) as GameObject;
+            cadran = Instantiate(cadran_prefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +1.5f, this.gameObject.transform.position.z), Quaternion.identity) as GameObject;
             while (temps > 0)
             {
 
@@ -596,7 +600,19 @@ public class Player : MonoBehaviour {
                             {
 
                                 ingredient = vivant_script.ingredient_recolte[0].GetComponent<Ingredient>();
+								//ACHIEVEMENT
+								/*
+								switch(ingredient.name)
+								{
+									case "I_champignon":
+										QuestEventManager.quest_emit(QuestEventManagerType.ADD_MUSH);
+										break;
 
+									case "I_venin":
+										QuestEventManager.quest_emit(QuestEventManagerType.ADD_VENON);
+										break;
+								}
+								*/
                                 ingredient.PlayerPosition = this.transform;
                                 ingredient.IsInInventaire = true;
                                 ingredient.index_inventaire = i;
@@ -605,6 +621,9 @@ public class Player : MonoBehaviour {
                                 place_inventaire--;
                                 vivant_script.ingredient_recolte[0] = null;
                                 change = true;
+
+								
+
                                 break;
                             }
                         
@@ -625,102 +644,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-        IEnumerator depecage(float temps, GameObject other, string objet)
-        {
-        if (objet == "vivant") // && place_inventaire>0)
-        {
-            vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
-            cadran = Instantiate(cadran_prefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y+1, this.gameObject.transform.position.z), Quaternion.identity) as GameObject;
-            while (temps > 0)
-            {
-                
-                //Si le joueur presse constament le button de récolte //Si le joueur ne presse aucun autre bouton (sauf visée)
-                if ((Input.GetKey(KeyCode.E) || Input.GetButton("LB_1") || Input.GetButton("RB_1"))
-                        && !up && !down && !left && !right
-                        && Input.GetAxis("TriggersL_1") == 0 && Input.GetAxis("TriggersR_1") == 0
-                        && !Input.GetButtonDown("A_1") && !Input.GetButtonDown("B_1") && !Input.GetButtonDown("X_1") && !Input.GetButtonDown("Y_1")
-                        && Input.GetAxis("DPad_XAxis_1") == 0 && Input.GetAxis("DPad_YAxis_1") == 0
-                        && !Input.GetButtonDown("Start_1") && !Input.GetButtonDown("Back_1")
-                    )
-                {
-                    yield return new WaitForSeconds(1);
-                    temps -= 1;
-
-
-                }
-                else
-                {
-                    //le joueur vient d'arreter de récolter, il n'est plus busy
-                    busy = false;
-
-                    //on fini l'animation de récolte 
-                    anim.SetTrigger("recolting_end");
-
-                    //on détruit le cadran en définissant que le temps est de zéro
-                    cadran_script = (Chargement_cadran)cadran.GetComponent(typeof(Chargement_cadran));
-                    cadran_script.timer = -1;
-                    break;
-                }
-                //le joueur vient de finir de récolter, il n'est plus busy
-                if (temps <= 0)
-                {
-                    cadran_script = (Chargement_cadran)cadran.GetComponent(typeof(Chargement_cadran));
-                    cadran_script.timer = -1;
-                    busy = false;
-                    vivant_script.depecable_fait = true;
-
-                    
-                    //on fini l'animation de récolte 
-                    anim.SetTrigger("recolting_end");
-
-                   
-
-                    bool change = false;
-
-                    for (int i = 0; i < vivant_script.ingredient_depecable.Length; i++)   //Pour chaque case de l'inventaire...
-                    {
-                        if (place_inventaire <= 0)
-                        {
-                            break;
-                        }
-
-                        for (int j = 0; j < vivant_script.ingredient_depecable.Length; j++)//Pour chaque élément du tableau...
-                        {
-
-                            if (place_inventaire <= 0)
-                            {
-                                break;
-                            }
-
-                            if (inventaire[i] == null)                       //S'il y a un espace vide
-                            {
-                                //Debug.Log(vivant_script.ingredient_recolte[i]+" "+i);
-                                inventaire[i] = vivant_script.ingredient_depecable[j]; //On met l'ingrédient dedans
-                                //Debug.Log(inventaire[i]);
-                                place_inventaire--;
-                                vivant_script.ingredient_depecable[i] = null;
-                                change = true;
-                                break;
-                            }
-                        }
-
-                        if(change==true)
-                        {
-                            break;
-                        }
-
-                    }
-                }
-            }
-        }
        
-        
-        
-        
-
-        
-
-    }
 
     #region//Déplacements
 
@@ -904,7 +828,7 @@ public class Player : MonoBehaviour {
 	
     void GoTo_Gameover()
     {
-        Application.LoadLevel("Gameover");
+        Application.LoadLevel("Fin_Demo");
     }
 
 }

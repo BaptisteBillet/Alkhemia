@@ -30,6 +30,8 @@ public class Tarentulette_IA : MonoBehaviour {
 
     public bool IsShooting;
 
+	public Vivant vivant;
+
     void Start()
     {
         //INITIALISATION
@@ -40,8 +42,21 @@ public class Tarentulette_IA : MonoBehaviour {
 
     void Update()
     {
+		
+
         if(IsHunting==false)
         {
+			if (vivant.agresseur != null)
+			{
+				detection_script.cible = vivant.agresseur;
+			}
+			else
+			{
+				cible = null;
+				ennemi_detected = false;
+			}
+
+
             if (detection_script.cible != null)
             {
                 cible = detection_script.cible;
@@ -63,7 +78,7 @@ public class Tarentulette_IA : MonoBehaviour {
 				anim.ResetTrigger("shoot");
 				if(IsShooting==false)
 				{
-					destination_script.cible = detection_script.cible.transform;
+					destination_script.cible = cible.transform;
 					anim.SetBool("moving", true);
 				}
                

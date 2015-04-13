@@ -5,8 +5,9 @@ using UnityStandardAssets.ImageEffects;
 public class QuestManager : MonoBehaviour
 {
 	#region Members
-	[HideInInspector]
+	
 	public int toxic_mush_number;
+
 	[HideInInspector]
 	public bool toxic_mush;
 	[HideInInspector]
@@ -21,10 +22,17 @@ public class QuestManager : MonoBehaviour
 	public GameObject Validate_mush;
 	public GameObject Validate_spider;
 
-	public GameObject mush_white;
-	public GameObject venon_white;
+	public GameObject Validate_mush_pop;
+	public GameObject Validate_spider_pop;
+
+	public GameObject Popup;
 
 	public GameObject Finish;
+
+	private bool champi;
+	private bool venin;
+ 
+
 	#endregion
 
 	// Use this for initialization
@@ -86,6 +94,7 @@ public class QuestManager : MonoBehaviour
 		if (toxic_mush && spider_venon)
 		{
 			finish = true;
+			Invoke("Goto_Fin", 3);
 		}
 
 		if (toxic_mush==false || spider_venon==false)
@@ -93,28 +102,43 @@ public class QuestManager : MonoBehaviour
 			finish = false;
 		}
 
-		if (toxic_mush == true)
+		if (toxic_mush == true && champi==false)
 		{
-			Validate_mush.SetActive(true); mush_white.SetActive(false);
+			champi = true;
+			Validate_mush.SetActive(true);
+			Validate_mush_pop.SetActive(true);
+			Popup.SetActive(true);
 		}
-		if (spider_venon == true)
+		if (spider_venon == true && venin==false)
 		{
-			Validate_spider.SetActive(true); venon_white.SetActive(false);
+			venin = true;
+			Validate_spider.SetActive(true);
+			Validate_spider_pop.SetActive(true);
+			Popup.SetActive(true);
 		}
 
 
 		if (toxic_mush == false)
 		{
-			Validate_mush.SetActive(false); mush_white.SetActive(true);
+			champi = false;
+			Validate_mush.SetActive(false);
+			Validate_mush_pop.SetActive(false);
 		}
 		if (spider_venon == false)
 		{
-			Validate_spider.SetActive(false); venon_white.SetActive(true);
+			venin = false;
+			Validate_spider.SetActive(false);
+			Validate_spider_pop.SetActive(false);
 		}
 		
 		
 
 	}
 
-	
+	void Goto_Fin()
+	{
+		Application.LoadLevel("Fin_Demo");
+	}
+
+
 }

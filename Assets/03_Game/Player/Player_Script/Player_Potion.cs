@@ -29,6 +29,9 @@ public class Player_Potion : MonoBehaviour
     public Animator anim;
     public bool tir_actif; //Pour les animations
 
+	public ballon_selection potion1;
+	public ballon_selection potion2;
+
     // Use this for initialization
     void Awake()
     {
@@ -113,6 +116,7 @@ public class Player_Potion : MonoBehaviour
         //Selection de la potion 1
         if (Input.GetKeyDown("1") || Input.GetButtonDown("Y_1") || Input.GetAxis("DPad_YAxis_1") > 0)
         {
+			potion1.play_animation = true;
             if(tab_potion[0]!=null) //Si il existe une potion à cet emplacement
             {
                 if (potion_script_0.active == false) //Si cette potion n'est pas l'ancienne
@@ -129,6 +133,7 @@ public class Player_Potion : MonoBehaviour
         }
         else if (Input.GetKeyDown("2") || Input.GetButtonDown("B_1") || Input.GetAxis("DPad_XAxis_1") > 0)
         {
+			potion2.play_animation = true;
             if (tab_potion[1] != null)
             {
                 if (potion_script_1.active == false)

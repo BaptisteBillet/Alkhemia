@@ -57,6 +57,20 @@ public class Ingredient : MonoBehaviour
             else
             {
                 Instantiate(Origin, PlayerPosition.position, this.transform.rotation);
+				Debug.Log(this.gameObject.name);
+				switch (this.gameObject.name)
+				{
+					case "I_champignon(Clone)":
+						QuestEventManager.quest_emit(QuestEventManagerType.SUBSTRACT_MUSH);
+						break;
+
+					case "I_venin(Clone)":
+						QuestEventManager.quest_emit(QuestEventManagerType.SUBSTRACT_VENON);
+						break;
+				}
+
+
+
             }
 			BagManager.instance.m_HUDInventaire.drop_inventaire(index_inventaire);
 			BagManager.instance.m_CanShoot = true;

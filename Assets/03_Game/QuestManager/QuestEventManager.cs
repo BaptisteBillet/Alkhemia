@@ -64,7 +64,7 @@ public class QuestEventManager : MonoBehaviour
 
 	void Start()
 	{
-		QuestEventManager.onEvent += (QuestEventManagerType emt) => { Debug.Log("&"); };
+		QuestEventManager.onEvent += (QuestEventManagerType emt) => {  };
 	}
 
 	public static void quest_emit(QuestEventManagerType emt)

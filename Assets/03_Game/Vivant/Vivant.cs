@@ -102,7 +102,7 @@ public class Vivant : MonoBehaviour {
 
     public void dps_process(float degat_dps, float duree_dps, float intervalle_dps, string statut_impact, float temps_impact)
     {
-        if (non_tuable == false)
+        if (non_tuable == false && life>0)
         {
             StartCoroutine(dps(degat_dps, duree_dps, intervalle_dps, statut_impact, temps_impact));
         }
@@ -112,7 +112,7 @@ public class Vivant : MonoBehaviour {
     public IEnumerator dps(float degat_dps, float duree_dps, float intervalle_dps, string statut_impact, float temps_impact)
     {
         //Si on est pas insensibilisé
-        if (statut != statut_impact)
+		if (statut != statut_impact)
         {
 
             //Le statut temporaire change ex empoisonement
@@ -148,7 +148,7 @@ public class Vivant : MonoBehaviour {
 
 	public void impact_process(Transform position_agresseur, float degat_impact, string statut_impact, float temps_impact)
     {
-        if (non_tuable == false)
+		if (non_tuable == false && life > 0)
         {
             StartCoroutine(impact(degat_impact, statut_impact, temps_impact));
         }
