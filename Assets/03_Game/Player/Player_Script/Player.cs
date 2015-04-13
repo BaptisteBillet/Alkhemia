@@ -78,8 +78,6 @@ public class Player : MonoBehaviour {
     private left_sprite left_script;
     private right_sprite right_script;
 
-
-
     //Inventaire
     public GameObject[] inventaire = new GameObject[1];
     public int place_inventaire;
@@ -114,6 +112,10 @@ public class Player : MonoBehaviour {
 	public bool CanMove;
 	private bool sort;
 
+	//AFFICHAGE RECOLTE
+	public GameObject sprite_E;
+	public GameObject sprite_RB;
+	
 
     ///////////////////////////////////////////////////////
 	void Awake ()
@@ -372,8 +374,6 @@ public class Player : MonoBehaviour {
     //Pièces
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        
         //SORTIE DE PIECE
         if (other.gameObject.tag == "exit_up")
         {
@@ -434,7 +434,6 @@ public class Player : MonoBehaviour {
     //Récoltes
     void OnTriggerStay2D(Collider2D other)
     {
-               
         if(busy==false)
         {
             if (depecage_en_cours == false)
@@ -448,6 +447,18 @@ public class Player : MonoBehaviour {
                     //Récolte possible
                     if (vivant_script.producteur == true && vivant_script.producteur_ok == true && vivant_script.recolte_fait == false)
                     {
+						if(ControllerManager.instance.m_XboxMode==true)
+						{
+							sprite_RB.SetActive(true);
+							sprite_E.SetActive(false);
+						}
+						else
+						{
+							sprite_RB.SetActive(false);
+							sprite_E.SetActive(true);
+						}
+
+
 
                         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("LB_1") || Input.GetButtonDown("RB_1"))
                         {
@@ -505,6 +516,11 @@ public class Player : MonoBehaviour {
         }
         
     }
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+
+	}
 
     IEnumerator recolte(float temps, GameObject other, string objet)
     {

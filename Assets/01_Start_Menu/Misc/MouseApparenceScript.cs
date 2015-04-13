@@ -20,9 +20,6 @@ public class MouseApparenceScript : MonoBehaviour {
     public void Update()
     {
         cursor.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
-
         cursor.transform.position = new Vector3(cursor.transform.position.x, cursor.transform.position.y, 10f);
     }
 

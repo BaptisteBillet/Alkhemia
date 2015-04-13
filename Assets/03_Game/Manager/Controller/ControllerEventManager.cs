@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 /*
  * Comment émettre un event:
 		QuestEventManager.emit(QuestEventManagerType.ENEMY_HIT);
@@ -26,26 +27,20 @@ using System.Collections;
  */
 
 
-public enum QuestEventManagerType
+public enum ControllerEventManagerType
 {
-	START,
-	ADD_MUSH,
-	ADD_VENON,
-	ADD_GOLDEN,
-	SUBSTRACT_MUSH,
-	SUBSTRACT_VENON,
-	SUBSTRACT_GOLDEN
+
 }
 
-public class QuestEventManager : MonoBehaviour
+public class ControllerEventManager : MonoBehaviour
 {
 
-	public delegate void EventAction(QuestEventManagerType emt);
+	public delegate void EventAction(ControllerEventManagerType emt);
 	public static event EventAction onEvent;
 
 	#region Singleton
-	static private QuestEventManager s_Instance;
-	static public QuestEventManager instance
+	static private ControllerEventManager s_Instance;
+	static public ControllerEventManager instance
 	{
 		get
 		{
@@ -64,10 +59,10 @@ public class QuestEventManager : MonoBehaviour
 
 	void Start()
 	{
-		QuestEventManager.onEvent += (QuestEventManagerType emt) => { Debug.Log("&"); };
+		ControllerEventManager.onEvent += (ControllerEventManagerType emt) => {  };
 	}
 
-	public static void quest_emit(QuestEventManagerType emt)
+	public static void controller_emit(ControllerEventManagerType emt)
 	{
 
 		if (onEvent != null)

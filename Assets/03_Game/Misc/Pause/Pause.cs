@@ -5,8 +5,7 @@ using System.Collections;
 public class Pause: MonoBehaviour {
   
  //refrence for the pause menu panel in the hierarchy
- public GameObject pauseMenuPanel;
- private GameObject fenetre;
+ public GameObject fenetre_pause_menu;
  //animator reference
  private Animator anim;
  //variable for checking if the game is paused
@@ -16,12 +15,6 @@ public class Pause: MonoBehaviour {
   //unpause the game on start
   Time.timeScale = 1;
 
-     /*
-  //get the animator component
-  anim = pauseMenuPanel.GetComponent<Animator>();
-  //disable it on start to stop it from playing the default animation
-  anim.enabled = false;
-      */
  }
   
  // Update is called once per frame
@@ -29,17 +22,17 @@ public class Pause: MonoBehaviour {
   //pause the game on escape key press and when the game is not already paused
   if((Input.GetKeyDown(KeyCode.Escape) || (Input.GetButtonDown("Start_1")))&&isPaused==false)
   {
-	  fenetre = Instantiate(pauseMenuPanel);
-   PauseGame();
+		fenetre_pause_menu.SetActive(true);
+		PauseGame();
   }
   //unpause the game if its paused and the escape key is pressed
   else if ((Input.GetKeyDown(KeyCode.Escape) || (Input.GetButtonDown("Start_1")))&&isPaused==true)
   {
-   UnpauseGame();
-   Destroy(fenetre);
+	  fenetre_pause_menu.SetActive(false);
+	  UnpauseGame();
   }
  }
-  
+
  //function to pause the game
  public void PauseGame(){
   /*

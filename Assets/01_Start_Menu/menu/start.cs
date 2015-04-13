@@ -22,6 +22,22 @@ public class start : MonoBehaviour {
         {
             Application.LoadLevel("Game");
         }
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			Application.LoadLevel("Game");
+		}
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			Application.LoadLevel("Game");
+		}
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			Application.LoadLevel("Game");
+		}
+		if (Input.GetKeyDown(KeyCode.D))
+		{
+			Application.LoadLevel("Game");
+		}
         
         if (Input.GetButtonDown("A_1"))
         {
@@ -55,6 +71,15 @@ public class start : MonoBehaviour {
         {
             Application.LoadLevel("Game");
         }
+
+		if (Input.GetMouseButtonDown(0))
+			Application.LoadLevel("Game");
+
+		if (Input.GetMouseButtonDown(1))
+			Application.LoadLevel("Game");
+
+		if (Input.GetMouseButtonDown(2))
+			Application.LoadLevel("Game");
 
        
 	}
