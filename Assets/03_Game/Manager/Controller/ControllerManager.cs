@@ -30,6 +30,11 @@ public class ControllerManager : MonoBehaviour {
 	#region Members
 	public bool m_XboxMode;
 
+	public GameObject curseur_xbox;
+	public GameObject sacoche_xbox;
+
+	public GameObject sacoche_clavier;
+
 	#endregion
 
 	// Use this for initialization
@@ -158,11 +163,27 @@ public class ControllerManager : MonoBehaviour {
 				m_XboxMode = false;
 			if (Input.GetMouseButtonDown(3))
 				m_XboxMode = false;
-
+			if(Input.GetKey(KeyCode.UpArrow))
+				m_XboxMode = false;
+			if (Input.GetKey(KeyCode.DownArrow))
+				m_XboxMode = false;
+			if (Input.GetKey(KeyCode.RightArrow))
+				m_XboxMode = false;
+			if (Input.GetKey(KeyCode.LeftArrow))
+				m_XboxMode = false;
 
 
 		}
 		#endregion
+
+		//MODE XBOX
+		curseur_xbox.SetActive(m_XboxMode);
+		sacoche_xbox.SetActive(m_XboxMode);
+
+		//MODE CLAVIER
+		sacoche_clavier.SetActive(!m_XboxMode);
+
+
 
 	}
 

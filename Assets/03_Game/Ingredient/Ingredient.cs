@@ -13,7 +13,7 @@ public class Ingredient : MonoBehaviour
 
     public int index_inventaire;
 
-    void OnMouseOver()
+    void OnMouseEnter()
     {
         BagManager.instance.m_CanShoot = false;
         if (IsInInventaire)
@@ -57,7 +57,7 @@ public class Ingredient : MonoBehaviour
             else
             {
                 Instantiate(Origin, PlayerPosition.position, this.transform.rotation);
-				Debug.Log(this.gameObject.name);
+				
 				switch (this.gameObject.name)
 				{
 					case "I_champignon(Clone)":
@@ -72,11 +72,18 @@ public class Ingredient : MonoBehaviour
 
 
             }
+
 			BagManager.instance.m_HUDInventaire.drop_inventaire(index_inventaire);
-			BagManager.instance.m_CanShoot = true;
-            Destroy(this.gameObject);
+			Invoke("SetTrue", 0.1f);
+			GetComponent<Collider2D>().enabled = false;
+            Destroy(this.gameObject,0.2f);
         }
     }
+
+	void SetTrue() //C'est jeromou il a dit
+	{
+		BagManager.instance.m_CanShoot = true;
+	}
 
 
 }

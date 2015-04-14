@@ -133,7 +133,7 @@ public class Balade : MonoBehaviour {
         pause_en_cours = true;
 
         if(anim!=null)
-		anim.SetBool("moving", false);
+			anim.SetBool("moving", false);
 
 		GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         yield return new WaitForSeconds(temps_pause);
@@ -144,66 +144,22 @@ public class Balade : MonoBehaviour {
 
     IEnumerator balade()
     {
-        //TEMPS/////////////////////////////////////////////////////////////
-        
         if(temps_ballade_aleatoire==true) //Si le temps est aléatoire
         {
             temps_ballade = Random.Range(min_temps_ballade, max_temps_ballade);
         }
-       /*
-        //MOUVEMENT/////////////////////////////////////////////////////////
-        //SI c'est aléatoire
-        if (balade_aleatoire == true)
-        {
-            //On s'assure que le max soit plus grand que le min
-            if (max_distance <= min_distance)
-            {
-                max_distance = min_distance;
-                Debug.LogError("LE MAX EST EGALE AU MIN");
-            }
 
-            //On défini une taille aléatoire
-            taille_balade = Random.Range(min_distance, max_distance);
-
-			destination = new Vector3(Random.Range(-5.55f, 5.55f) + this.gameObject.transform.position.x, Random.Range(-2.52f, 2.52f) + this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-
-		} 
-        if (balade_aleatoire == false)
-        {
-            float alea_x = Random.value;
-
-            if(alea_x<=0.5)
-            {
-                alea_x = 1;
-            }
-            else if (alea_x > 0.5)
-            {
-                alea_x = -1;
-            }
-            float alea_y = Random.value;
-            if (alea_y <= 0.5)
-            {
-                alea_y = 1;
-            }else if (alea_y > 0.5)
-            {
-                alea_y = -1;
-            }
-			destination = new Vector3(taille_balade * alea_x + this.gameObject.transform.position.x, taille_balade * alea_y + this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-			
-            if(destination.x > -5.55f && destination.x < 5.55f && destination.y > -2.52f && destination.x < 2.52f)
-			{
-				Debug.Log("a");
-			}
-
-        }
-		*/
-		//préventions bords d'écran
+		//On ne peut aller que dans la zone délimitée par l'écran: de (-5.55, -2.52) à (5.55, 2.52)
 		destination = new Vector3(Random.Range(-5.55f, 5.55f), Random.Range(-2.52f, 2.52f) , this.gameObject.transform.position.z);
         distance = Vector3.Distance(transform.position, destination);
-        ////////////////////////////////////////////////////////////////////
-		
-	
-        
+
+		//Si on est trop près, on va plus loin. Attention, ça peut faire aller en dehors de la zone.
+		if (distance < delta * delta * 1.5f)
+		{
+			destination = transform.position + (destination - transform.position).normalized * delta * delta * 1.5f;
+			distance = delta * delta * 1.5f;
+		}
+       
         balade_en_cours = true;
         yield return new WaitForSeconds(temps_ballade);
         balade_en_cours = false;
@@ -358,6 +314,7 @@ public class Balade : MonoBehaviour {
 		if (!up && !down && !right && !left)
 		{
 			velocity *= 0;
+			if(anim!=null)
 			anim.SetBool("moving", false);
 		}
 
