@@ -114,7 +114,7 @@ public class Player_Potion : MonoBehaviour
     void Update()
     {
         //Selection de la potion 1
-        if (Input.GetKeyDown("1") || Input.GetButtonDown("Y_1") || Input.GetAxis("DPad_YAxis_1") > 0)
+        if (Input.GetKeyDown("1") || Input.GetAxis("DPad_YAxis_1") > 0)
         {
 			potion1.play_animation = true;
             if(tab_potion[0]!=null) //Si il existe une potion à cet emplacement
@@ -131,7 +131,7 @@ public class Player_Potion : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown("2") || Input.GetButtonDown("B_1") || Input.GetAxis("DPad_XAxis_1") > 0)
+        else if (Input.GetKeyDown("2") ||Input.GetAxis("DPad_XAxis_1") > 0)
         {
 			potion2.play_animation = true;
             if (tab_potion[1] != null)
@@ -148,7 +148,7 @@ public class Player_Potion : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown("3") || Input.GetButtonDown("A_1")||Input.GetAxis("DPad_YAxis_1")<0)
+        else if (Input.GetKeyDown("3") ||Input.GetAxis("DPad_YAxis_1")<0)
         {
             if (tab_potion[2] != null)
             {
@@ -162,7 +162,7 @@ public class Player_Potion : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown("4") || Input.GetButtonDown("X_1") || Input.GetAxis("DPad_XAxis_1") < 0)
+        else if (Input.GetKeyDown("4") || Input.GetAxis("DPad_XAxis_1") < 0)
         {
             if (tab_potion[3] != null)
             {

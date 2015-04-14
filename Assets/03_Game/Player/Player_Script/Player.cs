@@ -528,6 +528,7 @@ public class Player : MonoBehaviour {
     {
 		sprite_E.SetActive(false);
 		sprite_RB.SetActive(false);
+		float life_at_this_time=life;
         if (objet == "vivant" && place_inventaire>0)
         {
             vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
@@ -542,6 +543,7 @@ public class Player : MonoBehaviour {
                         && !Input.GetButtonDown("A_1") && !Input.GetButtonDown("B_1") && !Input.GetButtonDown("X_1") && !Input.GetButtonDown("Y_1")
                         && Input.GetAxis("DPad_XAxis_1") == 0 && Input.GetAxis("DPad_YAxis_1") == 0
                         && !Input.GetButtonDown("Start_1") && !Input.GetButtonDown("Back_1")
+						&& life==life_at_this_time
                     )
                 {
                     yield return new WaitForSeconds(1);

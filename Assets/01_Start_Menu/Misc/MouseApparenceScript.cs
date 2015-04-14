@@ -19,16 +19,6 @@ public class MouseApparenceScript : MonoBehaviour {
 
     public void Update()
     {
-		if (ControllerManager.instance.m_XboxMode == false)
-		{
-			Debug.Log("false");
-		}
-		else
-		{
-			cursor.transform.position = new Vector3(1000, 1000, 0);
-			Debug.Log("true");
-		}
-
 		cursor.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		cursor.transform.position = new Vector3(cursor.transform.position.x, cursor.transform.position.y, 10f);
     }

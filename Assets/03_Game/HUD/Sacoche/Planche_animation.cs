@@ -16,7 +16,7 @@ public class Planche_animation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Back_1") || Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Y_1") || Input.GetKeyDown(KeyCode.R))
         {
             ouvert = !ouvert;
 
