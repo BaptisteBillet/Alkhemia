@@ -460,7 +460,7 @@ public class Player : MonoBehaviour {
 
 
 
-                        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("LB_1") || Input.GetButtonDown("RB_1"))
+                        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("A_1"))
                         {
                             //Pour le cadran, on lui défini son temps
                             cadran_script = (Chargement_cadran)cadran_prefab.GetComponent(typeof(Chargement_cadran));
@@ -492,7 +492,7 @@ public class Player : MonoBehaviour {
                     if (vivant_script.depecable == true && vivant_script.depecable_fait == false)
                     {
 
-                        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("LB_1") || Input.GetButtonDown("RB_1"))
+						if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("A_1"))
                         {
                             //Pour le cadran, on lui défini son temps
                             cadran_script = (Chargement_cadran)cadran_prefab.GetComponent(typeof(Chargement_cadran));
@@ -531,16 +531,17 @@ public class Player : MonoBehaviour {
 		float life_at_this_time=life;
         if (objet == "vivant" && place_inventaire>0)
         {
+			SoundManagerEvent.emit(SoundManagerType.PLAYER_INTERRACTION);
             vivant_script = (Vivant)other.gameObject.GetComponent(typeof(Vivant));
             cadran = Instantiate(cadran_prefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +1.5f, this.gameObject.transform.position.z), Quaternion.identity) as GameObject;
             while (temps > 0)
             {
 
                 //Si le joueur presse constament le button de récolte //Si le joueur ne presse aucun autre bouton (sauf visée)
-                if ((Input.GetKey(KeyCode.E) || Input.GetButton("LB_1") || Input.GetButton("RB_1"))
+                if ((Input.GetKey(KeyCode.E) || Input.GetButton("A_1"))
                         && !up && !down && !left && !right
                         && Input.GetAxis("TriggersL_1") == 0 && Input.GetAxis("TriggersR_1") == 0
-                        && !Input.GetButtonDown("A_1") && !Input.GetButtonDown("B_1") && !Input.GetButtonDown("X_1") && !Input.GetButtonDown("Y_1")
+                        && !Input.GetButtonDown("B_1") && !Input.GetButtonDown("X_1") && !Input.GetButtonDown("Y_1")
                         && Input.GetAxis("DPad_XAxis_1") == 0 && Input.GetAxis("DPad_YAxis_1") == 0
                         && !Input.GetButtonDown("Start_1") && !Input.GetButtonDown("Back_1")
 						&& life==life_at_this_time
@@ -575,7 +576,7 @@ public class Player : MonoBehaviour {
                     //VIVANT
                     vivant_script.producteur_ok = false;
 
-                   
+					SoundManagerEvent.emit(SoundManagerType.PLAYER_PICK);
 
                     //on fini l'animation de récolte 
                     anim.SetTrigger("recolting_end");

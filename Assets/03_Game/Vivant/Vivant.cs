@@ -148,7 +148,7 @@ public class Vivant : MonoBehaviour {
 
 	public void impact_process(Transform position_agresseur, float degat_impact, string statut_impact, float temps_impact)
     {
-		if (non_tuable == false && life > 0)
+		if (non_tuable == false)
         {
             StartCoroutine(impact(degat_impact, statut_impact, temps_impact));
         }
@@ -318,4 +318,7 @@ public class Vivant : MonoBehaviour {
         }
     }
    
+
+	
+
 }

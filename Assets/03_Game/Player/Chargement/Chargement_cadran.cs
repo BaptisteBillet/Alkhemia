@@ -39,7 +39,7 @@ public class Chargement_cadran : MonoBehaviour {
 	void Update () 
     {
 
-      if(stop==false && (Input.GetKey(KeyCode.E) || Input.GetButton("LB_1") || Input.GetButton("RB_1")))
+      if(stop==false && (Input.GetKey(KeyCode.E) || Input.GetButton("A_1")))
       {
           aiguille.Rotate(Vector3.forward * -rotation_frame * Time.deltaTime);
       }

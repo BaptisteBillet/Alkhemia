@@ -27,8 +27,9 @@ public class Explosable : MonoBehaviour {
     {
 		
 		if (other.gameObject.tag == "explosion")
-        {
-			SoundManagerEvent.emit(SoundManagerType.FIRE_LOOP);
+		{
+        
+			SoundManagerEvent.emit(SoundManagerType.EXPLOSION);
 			CameraEventManager.emit(EventManagerType.FISHEYEBUMP);
 			Debug.Log(this.gameObject);
                 Destroy(this.gameObject);

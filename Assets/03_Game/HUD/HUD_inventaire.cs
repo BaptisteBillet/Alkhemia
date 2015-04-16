@@ -93,12 +93,12 @@ public class HUD_inventaire : MonoBehaviour {
 
                         }
 
-                        if (ingredient_script.name == "I_rare")
+                        if (ingredient_script.name == "I_fruit_rare")
                         {
                             ingredient = Instantiate(I_fruit_rare) as GameObject;
                             ingredient.transform.parent = place[i].transform;
                             ingredient.transform.localPosition = new Vector3(0, 0, 0);
-                            ingredient.transform.localScale = new Vector3(1f, 1f, 1);
+                            ingredient.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
                             ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
                         }

@@ -57,7 +57,7 @@ public class Ingredient : MonoBehaviour
             else
             {
                 Instantiate(Origin, PlayerPosition.position, this.transform.rotation);
-				
+				SoundManagerEvent.emit(SoundManagerType.PLAYER_DROP);
 				switch (this.gameObject.name)
 				{
 					case "I_champignon(Clone)":

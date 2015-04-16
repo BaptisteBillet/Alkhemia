@@ -31,7 +31,8 @@ public class QuestManager : MonoBehaviour
 
 	private bool champi;
 	private bool venin;
- 
+
+	private bool son;
 
 	#endregion
 
@@ -57,14 +58,17 @@ public class QuestManager : MonoBehaviour
 			case QuestEventManagerType.ADD_MUSH:
 				toxic_mush_number++;
 				toxic_mush = true;
+				SoundManagerEvent.emit(SoundManagerType.QUEST_INGREDIENT);
 				break;
 
 			case QuestEventManagerType.ADD_VENON:
 				spider_venon_number++;
 				spider_venon = true;
+				SoundManagerEvent.emit(SoundManagerType.QUEST_INGREDIENT);
 				break;
 
 			case QuestEventManagerType.ADD_GOLDEN:
+				SoundManagerEvent.emit(SoundManagerType.QUEST_PANACEE);
 				golden = true;
 				break;
 
@@ -94,7 +98,8 @@ public class QuestManager : MonoBehaviour
 		if (toxic_mush && spider_venon)
 		{
 			finish = true;
-			Invoke("Goto_Fin", 3);
+			Invoke("Son_fin",0.1f);
+			
 		}
 
 		if (toxic_mush==false || spider_venon==false)
@@ -133,6 +138,17 @@ public class QuestManager : MonoBehaviour
 		
 		
 
+	}
+
+	void Son_fin()
+	{
+		if(son==false)
+		{
+			SoundManagerEvent.emit(SoundManagerType.QUEST_ALL);
+			son = true;
+		}
+		
+		Invoke("Goto_Fin", 3);
 	}
 
 	void Goto_Fin()
