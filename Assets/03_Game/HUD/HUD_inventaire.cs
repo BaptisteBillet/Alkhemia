@@ -14,6 +14,7 @@ public class HUD_inventaire : MonoBehaviour {
     public GameObject I_pommedepin;
 	public GameObject I_champignon;
 	public GameObject I_venin;
+	public GameObject I_rare;
 
     public GameObject player;
     private Player player_script;
@@ -93,15 +94,6 @@ public class HUD_inventaire : MonoBehaviour {
 
                         }
 
-                        if (ingredient_script.name == "I_fruit_rare")
-                        {
-                            ingredient = Instantiate(I_fruit_rare) as GameObject;
-                            ingredient.transform.parent = place[i].transform;
-                            ingredient.transform.localPosition = new Vector3(0, 0, 0);
-                            ingredient.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
-                            ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-
-                        }
                         if (ingredient_script.name == "I_pommedepin")
                         {
                             ingredient = Instantiate(I_pommedepin) as GameObject;
@@ -133,6 +125,16 @@ public class HUD_inventaire : MonoBehaviour {
 
 						}
 
+						if (ingredient_script.name == "I_rare")
+						{
+							ingredient = Instantiate(I_rare) as GameObject;
+							ingredient.transform.parent = place[i].transform;
+							ingredient.transform.localPosition = new Vector3(0, 0, 0);
+							ingredient.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+							ingredient.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+							QuestEventManager.quest_emit(QuestEventManagerType.ADD_GOLDEN);
+
+						}
                     }
                 }
             }

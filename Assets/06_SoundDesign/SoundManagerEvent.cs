@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
  * Comment émettre un event:
-		SoundManagerEvent.emit(SoundManagerType.ENEMY_HIT);
+		SoundManagerEvent.emit(EventManagerType.ENEMY_HIT);
  * 
  * Comment traiter un event (dans un start ou un initialisation)
 		EventManagerScript.onEvent += (EventManagerType emt, GameObject go) => {
@@ -29,7 +29,6 @@ using System.Collections;
 public enum SoundManagerType
 {
 	DAMAGE,
-	EXPLOSION,
 	FIGHT,
 	FIRE_START,
 	FIRE_LOOP,
@@ -37,16 +36,9 @@ public enum SoundManagerType
 	OREEBLEUE,
 	PLAYER_POTION,
 	PLAYER_INTERRACTION,
-	PLAYER_DROP,
-	PLAYER_PICK,
 	POTION,
 	SPIDER_DIE,
-	SPIDER_SPLIT,
-	SPIDER_BLOQUE,
-	QUEST_PANACEE,
-	QUEST_INGREDIENT,
-	QUEST_ALL
-
+	SPIDER_SPLIT
 
 
 }

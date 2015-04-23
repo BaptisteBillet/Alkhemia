@@ -129,26 +129,29 @@ public class Vivant : MonoBehaviour {
                 //On souffre moins longtemps
                 duree_dps -= intervalle_dps;
 
-                if (life <= 0 && disparait_si_mort == true)
-                {
-
-                    Destroy(parent);
-                }
-                if (life <= 0 && disparait_si_mort == false && anim!=null)
-                {
-                    degat_impact = 0;
-                    anim.SetTrigger("dies");
-                }
-
 
             }
+
+
+			if (life <= 0 && disparait_si_mort == true)
+			{
+
+				Destroy(parent);
+			}
+			if (life <= 0 && disparait_si_mort == false && anim != null)
+			{
+				degat_impact = 0;
+				anim.SetTrigger("dies");
+			}
+
+
         }
 
     }
 
 	public void impact_process(Transform position_agresseur, float degat_impact, string statut_impact, float temps_impact)
     {
-		if (non_tuable == false)
+		if (non_tuable == false && life > 0)
         {
             StartCoroutine(impact(degat_impact, statut_impact, temps_impact));
         }
@@ -319,6 +322,11 @@ public class Vivant : MonoBehaviour {
     }
    
 
-	
-
+	void Update()
+	{
+		if (life < 0 && disparait_si_mort == false && anim != null)
+		{
+			anim.SetTrigger("dies");
+		}
+	}
 }

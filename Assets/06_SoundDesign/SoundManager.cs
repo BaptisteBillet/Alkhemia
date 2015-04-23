@@ -4,7 +4,6 @@ using System.Collections;
 public class SoundManager : MonoBehaviour {
 	#region Members
 	public AudioClip Damage ;
-	public AudioClip Explosion;
 	public AudioClip Fight ;
 	public AudioClip Fire_Start ;
 	public AudioClip Fire_Loop ;
@@ -16,13 +15,6 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip Potion ;
 	public AudioClip Spider_Die ;
 	public AudioClip Spider_Split ;
-	public AudioClip Spider_Bloque;
-	public AudioClip Quest_panacee;
-	public AudioClip Quest_ingredient;
-	public AudioClip Quest_all;
-	
-	public AudioClip Player_Drop;
-	public AudioClip Player_Pick;
 
 	public AudioSource camera;
 	public AudioSource camera_ui;
@@ -30,8 +22,6 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource potion;
 	public AudioSource spider;
 	public AudioSource other;
-	public AudioSource explosion;
-	public AudioSource quest;
 
 	#endregion
 
@@ -62,11 +52,6 @@ public class SoundManager : MonoBehaviour {
 				player.Stop();
 				player.clip = Damage;
 				player.Play();
-				break;
-			case SoundManagerType.EXPLOSION:
-				explosion.Stop();
-				explosion.clip = Explosion;
-				explosion.Play();
 				break;
 			case SoundManagerType.FIGHT:
 				camera_ui.Stop();
@@ -107,16 +92,6 @@ public class SoundManager : MonoBehaviour {
 				player.clip = Player_Interraction;
 				player.Play();
 				break;
-			case SoundManagerType.PLAYER_DROP:
-				player.Stop();
-				player.clip = Player_Drop;
-				player.Play();
-				break;
-			case SoundManagerType.PLAYER_PICK:
-				player.Stop();
-				player.clip = Player_Pick;
-				player.Play();
-				break;
 			case SoundManagerType.POTION:
 				potion.Stop();
 				potion.clip =Potion;
@@ -131,26 +106,6 @@ public class SoundManager : MonoBehaviour {
 				spider.Stop();
 				spider.clip = Spider_Split;
 				spider.Play();
-				break;
-			case SoundManagerType.SPIDER_BLOQUE:
-				spider.Stop();
-				spider.clip = Spider_Bloque;
-				spider.Play();
-				break;
-			case SoundManagerType.QUEST_ALL:
-				quest.Stop();
-				quest.clip = Quest_all;
-				quest.Play();
-				break;
-			case SoundManagerType.QUEST_INGREDIENT:
-				quest.Stop();
-				quest.clip = Quest_ingredient;
-				quest.Play();
-				break;
-			case SoundManagerType.QUEST_PANACEE:
-				quest.Stop();
-				quest.clip = Quest_panacee;
-				quest.Play();
 				break;
 			
 		}
